@@ -21,16 +21,32 @@
 		          <div class="card">
 		          	<div class="card-content">
 		          		<div class="row">
+
+		          		@if(Auth::user()->access_id != 0)
+		          			<div class="col s12 center">
+		          				<div class="row">
+		          					<div class="school-logo" style="background: url('/{{$schools[0]->logo}}')"></div>
+		          					<h5>{{$schools[0]->name}}</h5>
+		          					<p class="center">{{$schools[0]->title1}}<br>{{$schools[0]->title2}}</p>
+		          				</div>
+		          			</div>
+
+		          			<input id="admission_school_id" type="hidden" name="school_id" value="{{$schools[0]->id}}">
+		          		@else
+
 		          			<div class="input-field col s12">
 							    <select id="admission_school_id" name="school_id">
-							      		@if(Auth::user()->access_id == 0)<option value="" disabled selected>Select School</option>@endif
+							      		<option value="" disabled selected>Select School</option>
 							      	@foreach($schools as $school)
 							      		<option value="{{$school->id}}">{{$school->name}}</option>
 							      	@endforeach
 							    </select>
 							    <label>School</label>
 							</div>
-					  		<div class="input-field col s4">
+						@endif
+
+
+					  		<div class="input-field col s4" style="margin-top: 1rem">
 							    <select id="admission_class_id" name="classes_id">
 							      		<option value="" disabled selected>select class</option>
 							      		@foreach($classes as $class)

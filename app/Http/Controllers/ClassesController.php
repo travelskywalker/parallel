@@ -79,7 +79,18 @@ class ClassesController extends Controller
 
         $school = School::find($class->school_id);
 
-        return view('pages.classes.class')->with(['class'=>$class, 'school'=>$school, 'fullpage'=>$fullpage, 'page'=>'index']);
+        $sections = DB::table('sections')
+                        ->select('sections.*', 'teachers.firstname', 'teachers.lastname')
+                        ->leftJoin('teachers', 'teachers.id', '=', 'sections.teacher_id')
+                        ->get();
+
+        return view('pages.classes.class')->with([
+                                                'class'=>$class, 
+                                                'school'=>$school,
+                                                'sections'=>$sections,
+                                                'fullpage'=>$fullpage,
+                                                'page'=>'index'
+                                            ]);
     }
 
     public function api_show($id){

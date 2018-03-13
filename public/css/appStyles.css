@@ -229,6 +229,11 @@ body{
     min-height: auto;
 }
 
+#admission_form .school-logo{
+    position: absolute;
+    top: 1rem;
+}
+
 
 
 

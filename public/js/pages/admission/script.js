@@ -61,12 +61,12 @@ function init(){
 			$('.search-student').hide();
 			showAdmissionForm();
 		}
-
+		
 	});
 
 	$('#search_student').keyup(function(){
 		var key = $(this).val();
-		var school_id = $('select#admission_school_id').val();
+		var school_id = $('#admission_school_id').val();
 		var url = '/school/'+school_id+'/student/search/'+key;
 
 		if(key.length >=2){

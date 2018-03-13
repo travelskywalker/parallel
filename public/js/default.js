@@ -177,7 +177,8 @@ function image_upload_init(){
 
 	});
 
-	$('.add-image-container').click(function(){
+	$('.add-image-container').click(function(e){
+		e.preventDefault();
 		var input = $('#'+$(this).attr('activates'));
 		input.click();
 	});
