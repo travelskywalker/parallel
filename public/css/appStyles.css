@@ -1,0 +1,251 @@
+.back-btn, .data-row, .collapsible-body ul li, .logout, .breadcrumb, #system_user, .data-edit-btn, .close, #search_modal .collection .collection-item, .search-student-result .collection-item{
+	cursor: pointer;
+}
+
+.p-title{
+	margin-top: -6px !important;
+    margin-left: 10px !important;
+}
+
+.error-container, .error{
+	color: red;
+}
+
+.data-edit-btn{
+	display: none;
+}
+
+.data-row .material-icons {
+    font-size: 15px;
+}
+
+.new-admission-section-details{
+	display:none;
+}
+
+.system-tab {
+    margin-top: 7px;
+}
+
+.navbar-fixed{
+	height: 113px;
+}
+
+.navcrumb .breadcrumb{
+	color: grey;
+}
+
+.navcrumb .breadcrumb::before{
+	color: grey;
+	font-size: 20px;
+}
+
+.breadcrumb.active{
+	color: black;
+}
+
+.add-image-container{
+	width: 200px;
+	height: 200px;
+	border: 1px solid black;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	background-color: #f7f7f7;
+	background-size: cover !important;
+	background-position: 50% 50% !important;
+	padding: 5px;
+    text-align: center;
+    font-size: 10px;
+}
+
+.add-image-container::after {
+    content: "click to upload image";
+    width: 100%;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 48%;
+    color: darkgray;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+nav .brand-logo.right{
+	margin-right: 64px;
+}
+
+.school-logo{
+	background-size: cover !important;
+    background-position: center !important;
+    width: 64px;
+    height: 64px;
+}
+
+#system_user{
+	display: inline block !important;
+	float:none;
+	margin: 0px;
+}
+
+.square.small {
+    width: 40px;
+    height: 40px;
+}
+
+.image-thumbmark{
+	background-size: cover !important;
+	background-position: center !important;
+}
+
+.detail-card{
+	min-height: 162px;
+}
+
+#edit_modal h4{
+	position: fixed;
+    width: 100%;
+    background: #fafafa;
+    z-index: 1;
+}
+
+.system-tab {
+    margin-right: 10px;
+}
+
+#app.login{
+	margin-top: 40vh;
+    transform: translateY(-50%);
+}
+
+div#app-main {
+    padding-top: 1em;
+}
+
+body{
+	background: #fafafa;
+}
+
+/*.search-page-modal {
+    background: #ffffff5c;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 999;
+    display:none;
+}*/
+
+/*.search-container {
+    border: 1px solid #ececec;
+    height: 95%;
+    width: 80%;
+    margin: auto;
+    margin-top: 50vh;
+    transform: translateY(-50%);
+    background: #fff;
+    padding: 1em;
+}*/
+
+#search_modal .collection{
+	border: none;
+}
+
+#search_modal .modal-content{
+	margin-top: -40px;
+}
+
+.search-prompt {
+    color: gray;
+}
+
+.search-prompt b {
+    color: #000000;
+}
+/*for form details*/
+.form-details input:disabled, .form-details textarea:disabled, .form-details select:disabled{
+    color: black !important;
+    border-bottom: 1px solid black !important;
+}
+
+@media print {
+    /* Hide everything in the body when printing... */
+    body.printing * { display: none; }
+    /* ...except our special div. */
+    body.printing #print-me { display: block; }
+}
+
+@media screen {
+    /* Hide the special layer from the screen. */
+    #print-me { display: none; }
+}
+
+.form-details .disabled .caret{
+    display:none;
+}
+.form-details .add-image-container:after:disabled{
+    display:none;
+}
+
+.image-container{
+    width: 200px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    background-color: #d4d4d4;
+    background-size: cover !important;
+    background-position: 50% 50% !important;
+}
+
+.thumb-image-container{
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    background-color: #d4d4d4;
+    background-size: cover !important;
+    background-position: 50% 50% !important;
+    display: inline-flex;
+}
+
+.main-btn{
+    position: fixed;
+    right: 1em;
+    bottom: 1em;
+
+}
+
+.logout.active .preloader-wrapper {
+    margin-top: 6px;
+    margin-right: 6px;
+}
+
+.logout.active{
+    color: #8c8c8c;
+}
+
+.collection .collection-item.avatar{
+    min-height: auto;
+}
+
+
+
+
+
+.search-student{
+    display:none;
+}
+
+.login-widget {
+    border: 1px solid;
+    height: 20vh;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+}
+
+
+
+
+
