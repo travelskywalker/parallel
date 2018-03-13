@@ -1,1 +1,0 @@
-<script src="/js/pages/pageCheck.js"></script>

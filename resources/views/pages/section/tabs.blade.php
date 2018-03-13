@@ -1,2 +1,0 @@
-<li class="tab" id="data-index" url="/section"><a class="@if($page == 'index') active @endif waves-effect">Manage</a></li>
-<li class="tab" id="data-add" url="/section/add"><a class="@if($page == 'add') active @endif waves-effect">Add</a></li>
