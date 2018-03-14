@@ -187,7 +187,6 @@ function initialize(){
 	$('.modal').modal();
 	$('.slider').slider();
 	$('ul.tabs').tabs({
-		swipeable: true,
 	});
 	$('.materialboxed').materialbox();
 	$('.tooltipped').tooltip({delay: 50});
@@ -220,7 +219,7 @@ $(document).ready(function(){
 	$('.logout').click(function(){
 
 		$(this).html(loader(' processing log out...'));
-		setTimeout(function(){ window.location.href = '/logout'; }, 1000);
+		setTimeout(function(){ window.location.href = '/logout'; localStorage.removeItem('passwordChangeShow')}, 1000);
 		 
 	});
 
@@ -232,6 +231,12 @@ $(document).ready(function(){
 	$('.sub-nav .tab').click(function(){ navClick($(this)); });
 
 
+	window.addEventListener("popstate", function(e) {
+		// state
+		var state = e.state;
+
+		if(state != null) window.location.href=state.view;
+	});
 });
 
 function admissionFormSubmit(form, url){

@@ -2,14 +2,7 @@
 	@include('pages.student.index')
 @else
 
-<div class="col s12">
-      <ul class="tabs">
-        <li class="tab col s3"><a href="#test1">Test 1</a></li>
-        <li class="tab col s3"><a class="active" href="#test2">Test 2</a></li>
-      </ul>
-    </div>
-    <div id="test1" class="col s12">Test 1</div>
-    <div id="test2" class="col s12">Test 2</div>
+	
 
 <div class="form-details">
 		<div class="row">
@@ -64,108 +57,48 @@
 	          <label for="admission_last_name">Last Name</label>
 			</div>
 			</div>
-  			<div class="col s3">
-		         <div class="input-field col">
-				    <select id="admission_gender" name="gender" disabled>
-			      		<option value="male" @if($student[0]->gender == 'male') selected @endif>male</option>
-			      		<option value="female" @if($student[0]->gender == 'female') selected @endif>female</option>
-			    </select>
-			    <label>Gender</label>
-				</div>
-  			</div>
-  			<div class="col s3">
-  				<div class="input-field col ">
-		          <input id="admission_birthdate" name="birthdate" type="text" class="datepicker birthdate" value="{{$student[0]->birthdate}}" disabled>
-		          <label for="admission_birthdate">Birthdate</label>
-				</div>
-  			</div>
-  			<div class="col s3">
-  				<div class="input-field col ">
-		          <input id="admission_birthplace" name="birthplace" type="text" class="validate birthdate" value="{{$student[0]->birthplace}}" disabled>
-		          <label for="admission_birthplace">Birth place</label>
-				</div>
-  			</div>
-  			<div class="col s3">
-  				<div class="input-field col ">
-			         <select id="admission_bloodtype" name="bloodtype" disabled>
-				      		<option value="" @if($student[0]->bloodtype == null) selected @endif >blood type</option>
-				      		<option value="O" @if($student[0]->bloodtype == 'O') selected @endif >O</option>
-				      		<option value="A" @if($student[0]->bloodtype == 'A') selected @endif>A</option>
-				      		<option value="B" @if($student[0]->bloodtype == 'B') selected @endif>B</option>
-				      		<option value="AB" @if($student[0]->bloodtype == 'AB') selected @endif>AB</option>
-				    </select>
-				    <label>Blood Type</label>
-				</div>
-  			</div>
-			<div class="col s6">
-				<div class="input-field col s12">
-	          <input id="admission_fathersname" name="fathers_name" type="text" class="validate" value="{{$student[0]->fathersname}}" disabled>
-	          <label for="admission_fathersname">Father's Name</label>
-			</div>
-			</div>
-			<div class="col s6">
-				<div class="input-field col s12">
-	          <input id="admission_mothersname" name="mothers_name" type="text" class="validate" value="{{$student[0]->mothersname}}" disabled>
-	          <label for="admission_mothersname">Mother's Name</label>
-			</div>
-			</div>
-			<div class="col s4">
-				<div class="input-field col s12">
-	          <input id="admission_guardianname" name="guardian_name" type="text" class="validate" value="{{$student[0]->guardianname}}" disabled>
-	          <label for="admission_guardianname">Guardian Name</label>
-			</div>
-			</div>
-			<div class="col s4">
-				<div class="input-field col s12">
-	          <input id="admission_emergencycontactnumber" name="emergencycontactnumber" type="number" class="validate" value="{{$student[0]->emergencycontactnumber}}" disabled>
-	          <label for="admission_emergencycontactnumber">Emergency Contact</label>
-			</div>
-			</div>
-			<div class="col s4">
-				<div class="input-field col s12">
-	          <input id="admission_guardianrelationship" name="guardianrelationship" type="text" class="validate" value="{{$student[0]->guardianrelationship}}" disabled>
-	          <label for="admission_guardianrelationship">Guardian Relationship</label>
-			</div>
-			</div>
+
+
+
 			<div class="col s12">
-	          <div class="input-field col s12">
-	            <textarea id="admission_address" name="address" class="materialize-textarea" data-length="120" disabled >{{$student[0]->address}}</textarea>
-	            <label for="admission_address">Address</label>
-	          </div>
-			</div>
-			<div class="col s6">
-				<div class="input-field col s12">
-	          <input id="admission_nationality" name="nationality" type="text" class="validate" value="{{$student[0]->nationality}}" disabled>
-	          <label for="admission_nationality">Nationality</label>
-			</div>
-			</div>
-			<div class="col s6">
-				<div class="input-field col s12">
-	          <input id="admission_religion" name="religion" type="text" class="validate" value="{{$student[0]->religion}}" disabled>
-	          <label for="admission_religion">Religion</label>
-			</div>
-			</div>
-			
-					<div class="collapsible-header"><i class="material-icons">account_circle</i>Others</div>
-			            <div class="collapsible-body">
-			            	<div class="col s12">
-					          <div class="input-field col s12">
-					            <textarea id="admission_notes" name="notes" class="materialize-textarea" data-length="120" disabled>{{$student[0]->notes}}</textarea>
-					            <label for="admission_notes">Notes</label>
-					          </div>
-							</div>
+		      <ul class="tabs">
+		        <li class="tab col s3"><a class="active" href="#about">About</a></li>
+		        <li class="tab col s3"><a href="#admission">Admission</a></li>
+		      </ul>
 
-							<div class="col s12">
-					          <div class="input-field col s12">
-					            <textarea id="admission_description" name="description" class="materialize-textarea" data-length="120" disabled>{{$student[0]->description}}</textarea>
-					            <label for="admission_description">Description</label>
-					          </div>
-							</div>
-			            </div>
+		      <div id="about" class="col s12 tab-content">
+		    	@include('pages.student.about-details')
+		    </div>
+		    <div id="admission" class="col s12 tab-content">
+		    	<div class="col s12">
+		    		<table class="bordered highlight">
+						<thead>
+						  <tr>
+						      <th>Date</th>
+						      <th>Class</th>
+						      <th>Section</th>
+						      <th>Status</th>
+						  </tr>
+						</thead>
 
-			
+						<tbody>
+							@foreach ($admissions as $admission)
+							<tr class="data-row row-" data-id="" onclick="">
+								<td>{{Carbon\Carbon::parse($admission->date)->format('M d, Y')}}</td>
+								<td>{{$admission->class_name}}</td>
+								<td>{{$admission->section_name}}</td>
+								<td>{{$admission->status}}</td>
+						  </tr>
+							@endforeach
+						</tbody>
+					</table>
+		    	</div>
+		    </div>
+		    </div>
 
-		</div>
+
+
+			          
 
 	</div>
 </div>

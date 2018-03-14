@@ -60,7 +60,7 @@ class UserController extends Controller
         return $this->index(false);
     }
 
-    public function adduserview(){
+    public function adduserview($fullpage=true){
 
         $user_school_id = Auth::user()->school_id;
         $access_id = Auth::user()->access_id;
@@ -73,11 +73,11 @@ class UserController extends Controller
                             return $query->where('schools.id', $user_school_id);
                         })->get();
 
-        return view('pages.user.adduser')->with(['schools'=>$schools, 'accesses'=>$accesses]);
+        return view('pages.user.adduser')->with(['schools'=>$schools, 'accesses'=>$accesses, 'fullpage'=>$fullpage,'page'=>'users']);
     }
 
     public function api_user_view(){
-        return $this->adduserview();
+        return $this->adduserview(false);
     }
 
     /**

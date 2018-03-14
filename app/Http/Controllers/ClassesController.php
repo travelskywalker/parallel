@@ -25,6 +25,7 @@ class ClassesController extends Controller
         $classes = DB::table('classes as c')
             ->select('c.id', 'c.name', 'c.notes', 'c.description', 'c.status', 'schools.name as school_name')
             ->leftJoin('schools', 'c.school_id', '=', 'schools.id')
+            ->orderBy('schools.name','asc')
             ->orderby('c.name','asc')
             ->when(Auth::user()->access_id != 0, function ($query) use ($user_school_id) {
                 return $query->where('c.school_id', $user_school_id);
@@ -82,12 +83,24 @@ class ClassesController extends Controller
         $sections = DB::table('sections')
                         ->select('sections.*', 'teachers.firstname', 'teachers.lastname')
                         ->leftJoin('teachers', 'teachers.id', '=', 'sections.teacher_id')
+                        ->orderBy('sections.timefrom')
                         ->get();
+
+        $students = DB::table('students')
+                        ->select('students.firstname', 'students.lastname', 'students.id', 'students.status', 'students.studentnumber', 'students.gender', 'sections.name as section_name')
+                        ->leftJoin('admissions', 'admissions.student_id', '=', 'students.id')
+                        ->leftJoin('sections', 'admissions.section_id', '=', 'sections.id')
+                        ->where('admissions.classes_id', '=', $id)
+                        ->orderBy('sections.name', 'asc')
+                        ->orderBy('students.lastname', 'asc')
+                        ->get();
+
 
         return view('pages.classes.class')->with([
                                                 'class'=>$class, 
                                                 'school'=>$school,
                                                 'sections'=>$sections,
+                                                'students'=>$students,
                                                 'fullpage'=>$fullpage,
                                                 'page'=>'index'
                                             ]);

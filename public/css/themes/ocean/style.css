@@ -1,27 +1,41 @@
-nav{
+nav , .page-footer {
 	background-color: #0b1863;
 }
 
-.nav-content{
+.nav-content, .tabs {
 	background-color: #abc3f9;
+}
+
+.tabs .tab a{
+	color: black;
 }
 
 .system-tab{
 	color: black;
 }
 
-.tabs.tabs-transparent .indicator{
+.tabs.tabs-transparent .indicator, .tabs .indicator{
 	background: red;
 }
 
-.tabs.tabs-transparent .tab a:hover, .tabs.tabs-transparent .tab a.active{
+.tabs.tabs-transparent .tab a:hover, .tabs.tabs-transparent .tab a.active, .tabs .tab a.active, .tabs .tab a:hover{
 	color: black;
 }
 
-.tabs.tabs-transparent .tab a, .tabs.tabs-transparent .tab.disabled a, .tabs.tabs-transparent .tab.disabled a:hover{
+.tabs.tabs-transparent .tab a, .tabs.tabs-transparent .tab.disabled a, .tabs.tabs-transparent .tab.disabled a:hover, .tabs .tab a{
 	color: gray;
+}
+
+.tab-content {
+    border: 1px solid #abc3f9;
 }
 
 .btn-floating{
 	background-color: #03a9f4;
 }
+
+.tap-target {
+    background-color: #00BCD4;
+    color: #000000;
+}
+

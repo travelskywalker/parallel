@@ -16,11 +16,11 @@ class Student extends Model
     ];
 
 
-    public function section(){
+    public function sections(){
     	return $this->hasMany('App\Section');
     }
 
-    public function admission(){
+    public function admissions(){
     	return $this->hasMany('App\Admission');
     }
 }

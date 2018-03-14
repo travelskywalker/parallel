@@ -30,6 +30,7 @@ class StudentController extends Controller
                                 return $query->where('admissions.school_id', $user_school_id);
                             })
                             ->orderBy('students.lastname','asc')
+                            ->groupBy('students.id')
                             ->get();
 
 
@@ -79,9 +80,20 @@ class StudentController extends Controller
                             ->leftJoin('sections', 'admissions.section_id', '=', 'sections.id')
                             ->where('students.id','=', $id)
                             ->get();
+
+        $admissions = DB::table('admissions')
+                            ->select('students.id', 'classes.name as class_name', 'sections.*', 'sections.name as section_name', 'schools.name as school_name','admissions.*')
+                            ->leftJoin('students', 'admissions.student_id','=','students.id')
+                            ->leftJoin('schools', 'admissions.school_id', '=', 'schools.id')
+                            ->leftJoin('classes', 'admissions.classes_id', '=', 'classes.id')
+                            ->leftJoin('sections', 'admissions.section_id', '=', 'sections.id')
+                            ->where('students.id','=', $id)
+                            ->get();
+
         return view('pages.student.student')
                 ->with([
                     'student'=>$student,
+                    'admissions'=>$admissions,
                     'fullpage'=>$fullpage,
                     'page'=>'details'
                 ]);

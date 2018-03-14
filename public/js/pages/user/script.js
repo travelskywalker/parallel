@@ -1,6 +1,5 @@
 loadIndex();
 
-
 function init(){
 	Materialize.updateTextFields();
 

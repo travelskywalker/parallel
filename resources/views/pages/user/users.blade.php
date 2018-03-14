@@ -26,5 +26,5 @@
 			</tbody>
 		</table>
 
-		@include('action-menu.menu',array( 'menus'=> ['add' ]) )
+		@include('action-menu.menu',array( 'menus'=> ['add', 'print' ]) )
 @endif

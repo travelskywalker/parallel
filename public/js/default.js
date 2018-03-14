@@ -193,9 +193,9 @@ function getUserInfo(){
 		if(data.logo != null) {
 			$('.school-logo').css('background', 'url("/'+data.logo+'"');
 			// $('.brand-logo').addClass('withschoollogo');
-			$('#system_user').html(data.school_name + ' , ' + data.access_name);
+			$('#system_user').html(data.school_name + ' , ' + data.access_name + '<i id="settings_btn" class="material-icons" title="settings">settings</i>');
 		}else{
-			$('#system_user').html(data.access_name);
+			$('#system_user').html(data.access_name + '<i id="settings_btn" class="material-icons" title="settings">settings</i>');
 		}
 
 	})
@@ -216,7 +216,6 @@ function getPageTitle(route){
 	for (var i = 0; i < routes.length; i++){
 	  if (routes[i].path == route){
 	    // console.log(routes[i].name);
-	    
 	    return routes[i].title;
 	  }
 	}
@@ -226,8 +225,7 @@ function setPageUrl(url){
 
 	if(url.indexOf('/s/') >= 0) url = url.slice(2);
 	
-	
-	window.history.pushState('', '', url);
+	window.history.pushState({view: window.location.href},null, url);
 }
 
 function getNavCrumbs(link = true){
