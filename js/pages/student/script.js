@@ -1,5 +1,0 @@
-loadIndex();
-
-function init(){
-	
-}
