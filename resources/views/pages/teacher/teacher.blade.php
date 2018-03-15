@@ -36,15 +36,10 @@
 		          <input id="lastname" name="lastname" type="text" class="validate" value="{{$teacher->lastname}}" disabled>
 		          <label for="lastname">Last Name</label>
 				</div>
-		  	</div>
-   
-      			<div class="col s12">
 			          <div class="input-field col s12">
 			            <textarea id="admission_notes" name="notes" class="materialize-textarea" data-length="120" disabled>{{$teacher->notes}}</textarea>
 			            <label for="admission_notes">Notes</label>
 			          </div>
-      			</div>
-      			<div class="col s12">
 			          <div class="input-field col s12">
 			            <textarea id="admission_description" name="description" class="materialize-textarea" data-length="120" disabled="">{{$teacher->description}}</textarea>
 			            <label for="admission_description">Description</label>
