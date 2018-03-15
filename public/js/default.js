@@ -224,7 +224,7 @@ function getPageTitle(route){
 function setPageUrl(url){
 
 	if(url.indexOf('/s/') >= 0) url = url.slice(2);
-	
+	console.log(window.location.href);
 	window.history.pushState({view: window.location.href},null, url);
 }
 

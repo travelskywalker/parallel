@@ -8,6 +8,8 @@
 			  <tr>
 			      @if(Auth::user()->access_id == 0)<th>School</th>@endif
 			      <th>Class</th>
+			      <th>Teacher</th>
+			      <th>Total Student</th>
 			      <th>Notes</th>
 			      <th>Description</th>
 			      <th>Status</th>
@@ -20,6 +22,8 @@
 				<tr class="data-row" onclick="showDetails('classes',{{$class->id}})">
 			    @if(Auth::user()->access_id == 0)<td>{{$class->school_name}}</td>@endif
 			    <td>{{$class->name}}</td>
+			    <td>{{$class->firstname}} {{$class->lastname}}</td>
+			    <td></td>
 			    <td>{{$class->notes}}</td>
 			    <td>{{$class->description}}</td>
 			    <td>{{$class->status}}</td>

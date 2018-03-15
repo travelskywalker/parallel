@@ -126,15 +126,30 @@ class SectionController extends Controller
      */
     public function show($id, $fullpage = true)
     {
-        $section = Section::find($id);
+        // $section = Section::find($id);
 
-        $teachers = Teacher::find($section->teacher_id);
+        $section = DB::table('sections')
+                        ->select('sections.*', 'classes.name as class_name', 'classes.id', 'teachers.firstname', 'teachers.lastname', 'schools.name as school_name', 'schools.title1 as schooltitle1', 'schools.title2 as schooltitle2', 'schools.logo as school_logo')
+                        ->leftJoin('classes', 'classes.id', '=', 'sections.classes_id')
+                        ->leftJoin('teachers', 'teachers.id', '=', 'sections.teacher_id')
+                        ->leftJoin('schools', 'schools.id', '=', 'sections.school_id')
+                        ->where('sections.id', '=', $id)
+                        ->get();
 
-        $class = Classes::find($section->classes_id);
+        // $teachers = Teacher::find($section->teacher_id);
 
-        // $students = Student::where('section_id','=',$id)->get();
+        // $class = Classes::find($section->classes_id);
 
-        return view('/pages.section.section')->with(['section'=>$section, 'teachers'=>$teachers, 'classes'=>$class, 'fullpage'=>$fullpage]);
+        $students = DB::table('students')
+                        ->select('students.firstname', 'students.lastname', 'students.id', 'students.status', 'students.studentnumber', 'students.gender', 'sections.name as section_name')
+                        ->leftJoin('admissions', 'admissions.student_id', '=', 'students.id')
+                        ->leftJoin('sections', 'admissions.section_id', '=', 'sections.id')
+                        ->where('admissions.section_id', '=', $id)
+                        ->orderBy('sections.name', 'asc')
+                        ->orderBy('students.lastname', 'asc')
+                        ->get();
+
+        return view('/pages.section.section')->with(['section'=>$section, 'students'=>$students, 'fullpage'=>$fullpage, 'page'=>'section']);
     }
 
     public function api_show($id){

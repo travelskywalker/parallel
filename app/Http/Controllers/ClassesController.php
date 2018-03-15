@@ -23,8 +23,9 @@ class ClassesController extends Controller
         $user_school_id = Auth::user()->school_id;
 
         $classes = DB::table('classes as c')
-            ->select('c.id', 'c.name', 'c.notes', 'c.description', 'c.status', 'schools.name as school_name')
+            ->select('c.id','c.teacher_id', 'c.name', 'c.notes', 'c.description', 'c.status', 'schools.name as school_name', 'teachers.firstname', 'teachers.lastname')
             ->leftJoin('schools', 'c.school_id', '=', 'schools.id')
+            ->leftJoin('teachers', 'teachers.id', '=', 'c.teacher_id')
             ->orderBy('schools.name','asc')
             ->orderby('c.name','asc')
             ->when(Auth::user()->access_id != 0, function ($query) use ($user_school_id) {
@@ -76,13 +77,23 @@ class ClassesController extends Controller
      */
     public function show($id, $fullpage = true)
     {
-        $class = Classes::find($id);
+        // $class = Classes::find($id);
 
-        $school = School::find($class->school_id);
+        $class = DB::table('classes')
+                    ->select('classes.*', 'classes.school_id', 'teachers.firstname', 'teachers.lastname', 'teachers.id as teacher_id', 'schools.name as school_name', 'schools.title1 as schooltitle1', 'schools.title2 as schooltitle2', 'schools.logo as school_logo')
+                    ->leftJoin('teachers', 'teachers.id', '=', 'classes.teacher_id')
+                    ->leftJoin('schools', 'schools.id', '=', 'classes.school_id')
+                    ->where('classes.id', '=' ,$id)
+                    ->get();
+
+                    // var_dump($class);
+
+        // $school = School::find($class->school_id);
 
         $sections = DB::table('sections')
                         ->select('sections.*', 'teachers.firstname', 'teachers.lastname')
                         ->leftJoin('teachers', 'teachers.id', '=', 'sections.teacher_id')
+                        ->where('sections.classes_id', $id)
                         ->orderBy('sections.timefrom')
                         ->get();
 
@@ -98,7 +109,6 @@ class ClassesController extends Controller
 
         return view('pages.classes.class')->with([
                                                 'class'=>$class, 
-                                                'school'=>$school,
                                                 'sections'=>$sections,
                                                 'students'=>$students,
                                                 'fullpage'=>$fullpage,
