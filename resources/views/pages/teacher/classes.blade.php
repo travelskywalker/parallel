@@ -3,8 +3,10 @@
 		<thead>
 		  <tr>
 		  	<th>Name</th>
-		  	<th>Notes</th>
-		  	<th>Description</th>
+		  	<th>Sections</th>
+		    <th>Students</th>
+		    <th>Male</th>
+		    <th>Female</th>
 		  </tr>
 		</thead>
 
@@ -13,8 +15,10 @@
 			@foreach ($classes as $class)
 			<tr class="data-row" onclick="showDetails('classes',{{$class->id}})">
 		    <td>{{$class->name}}</td>
-		    <td>{{$class->notes}}</td>
-		    <td>{{$class->description}}</td>
+		    <td>{{$class->section_count}}</td>
+			<td>{{$class->student_count}}</td>
+			<td>{{$class->male_count}}</td>
+			<td>{{$class->female_count}}</td>
 		  </tr>
 			@endforeach
 		</tbody>

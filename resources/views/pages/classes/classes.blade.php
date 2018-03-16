@@ -25,8 +25,8 @@
 			    <td>{{$class->firstname}} {{$class->lastname}}</td>
 			    <td>{{$class->section_count}}</td>
 			    <td>{{$class->student_count}}</td>
-			    <td>{{$class->female_count}}</td>
 			    <td>{{$class->male_count}}</td>
+			    <td>{{$class->female_count}}</td>
 			  </tr>
 				@endforeach
 			</tbody>

@@ -86,7 +86,15 @@ class TeacherController extends Controller
 
         $sections = Teacher::find($id)->section;
 
-        $classes = Teacher::find($id)->classes;
+        // $classes = Teacher::find($id)->classes;
+        $classes = DB::table('classes')
+                    ->selectRaw('classes.*, COUNT(DISTINCT(admissions.id)) as student_count, SUM(CASE WHEN students.gender = "male" THEN 1 ELSE 0 END) AS male_count, SUM(CASE WHEN students.gender = "female" THEN 1 ELSE 0 END) AS female_count, COUNT(DISTINCT(sections.id)) as section_count')
+                    ->leftJoin('admissions', 'admissions.classes_id', '=', 'classes.id')
+                    ->leftJoin('sections', 'sections.id', '=', 'admissions.section_id')
+                    ->leftJoin('students', 'students.id', '=', 'admissions.student_id')
+                    ->where('classes.teacher_id', '=', $id)
+                    ->groupBy('classes.id')
+                    ->get();
 
 
         return view('pages.teacher.teacher')->with(['teacher' => $teacher, 'sections' => $sections, 'classes' => $classes, 'fullpage'=>$fullpage, 'page'=>'teacher']);

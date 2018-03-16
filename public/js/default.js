@@ -471,21 +471,40 @@ function uploadTempImg(url, data){
 }
 
 function printBtn(){
-	alert('print document');
+
+	alert('print');
 	return;
+	// Popup($('#app-main').html())
 	// if(window.print()) console.log('printing');
-	window.print();
-	console.log(printing);
+	// window.print();
+	console.log('printing');
 	//Copy the element you want to print to the print-me div.
     $("#app-main").clone().appendTo("#print_div");
     //Apply some styles to hide everything else while printing.
     $("body").addClass("printing");
     //Print the window.
-    window.print();
+    // window.print();
+    setTimeout(function(){ 
+    	window.print(); 
+
+    	$("body").removeClass("printing");
+	    //Clear up the div.
+	    $("#print_div").empty();
+
+    },1000);
     //Restore the styles.
-    $("body").removeClass("printing");
-    //Clear up the div.
-    $("#print_div").empty();
+    
+}
+function Popup(data) {
+      var mywindow = window.open('', 'new div', 'height=400,width=600');
+      mywindow.document.write('<html><head><title></title>');
+      mywindow.document.write('<link rel="stylesheet" href="/css/materialize.min.css" type="text/css" />');
+      mywindow.document.write('</head><body >');
+      mywindow.document.write(data);
+      mywindow.document.write('</body></html>');
+      // mywindow.focus();
+      // mywindow.close();
+
 }
 
 function addBtn(){
