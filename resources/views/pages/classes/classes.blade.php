@@ -1,7 +1,7 @@
 @if($fullpage)
 	@include('pages.classes.index')
 @else
-<h5>Classes</h5>
+<h5 >Classes</h5>
 	@if(count($classes) >0)
 		<table class="bordered highlight">
 			<thead>
@@ -9,10 +9,10 @@
 			      @if(Auth::user()->access_id == 0)<th>School</th>@endif
 			      <th>Class</th>
 			      <th>Teacher</th>
-			      <th>Total Student</th>
-			      <th>Notes</th>
-			      <th>Description</th>
-			      <th>Status</th>
+			      <th>Sections</th>
+			      <th>Students</th>
+			      <th>Male</th>
+			      <th>Female</th>
 			  </tr>
 			</thead>
 
@@ -23,10 +23,10 @@
 			    @if(Auth::user()->access_id == 0)<td>{{$class->school_name}}</td>@endif
 			    <td>{{$class->name}}</td>
 			    <td>{{$class->firstname}} {{$class->lastname}}</td>
-			    <td></td>
-			    <td>{{$class->notes}}</td>
-			    <td>{{$class->description}}</td>
-			    <td>{{$class->status}}</td>
+			    <td>{{$class->section_count}}</td>
+			    <td>{{$class->student_count}}</td>
+			    <td>{{$class->female_count}}</td>
+			    <td>{{$class->male_count}}</td>
 			  </tr>
 				@endforeach
 			</tbody>

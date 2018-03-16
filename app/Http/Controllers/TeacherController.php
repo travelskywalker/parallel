@@ -46,6 +46,7 @@ class TeacherController extends Controller
             'firstname' => 'required',
             'middlename' => 'required',
             'lastname' => 'required',
+            'licensenumber' => 'unique:teachers',
         ]);
 
         // create school data
@@ -85,7 +86,10 @@ class TeacherController extends Controller
 
         $sections = Teacher::find($id)->section;
 
-        return view('pages.teacher.teacher')->with(['teacher' => $teacher, 'sections' => $sections, 'fullpage'=>$fullpage, 'page'=>'teacher']);
+        $classes = Teacher::find($id)->classes;
+
+
+        return view('pages.teacher.teacher')->with(['teacher' => $teacher, 'sections' => $sections, 'classes' => $classes, 'fullpage'=>$fullpage, 'page'=>'teacher']);
     }
 
     public function api_show($id){

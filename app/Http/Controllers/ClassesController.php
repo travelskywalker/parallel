@@ -23,11 +23,15 @@ class ClassesController extends Controller
         $user_school_id = Auth::user()->school_id;
 
         $classes = DB::table('classes as c')
-            ->select('c.id','c.teacher_id', 'c.name', 'c.notes', 'c.description', 'c.status', 'schools.name as school_name', 'teachers.firstname', 'teachers.lastname')
+            ->selectRaw('c.id,c.teacher_id, c.name, c.notes, c.description, c.status, schools.name as school_name, teachers.firstname, teachers.lastname, COUNT(DISTINCT(admissions.id)) as student_count, SUM(CASE WHEN students.gender = "male" THEN 1 ELSE 0 END) AS male_count, SUM(CASE WHEN students.gender = "female" THEN 1 ELSE 0 END) AS female_count, COUNT(DISTINCT(sections.id)) as section_count' )
             ->leftJoin('schools', 'c.school_id', '=', 'schools.id')
             ->leftJoin('teachers', 'teachers.id', '=', 'c.teacher_id')
+            ->leftJoin('admissions', 'admissions.classes_id', '=', 'c.id')
+            ->leftJoin('sections', 'admissions.section_id', '=', 'sections.id')
+            ->leftJoin('students', 'admissions.student_id', 'students.id')  
             ->orderBy('schools.name','asc')
-            ->orderby('c.name','asc')
+            ->orderBy('c.name','asc')
+            ->groupBy('c.id')
             ->when(Auth::user()->access_id != 0, function ($query) use ($user_school_id) {
                 return $query->where('c.school_id', $user_school_id);
             })

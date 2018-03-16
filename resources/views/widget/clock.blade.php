@@ -1,4 +1,4 @@
-<div class="col s4 center" id="clock_widget">
+<div class="col s4 center rotateInUpLeft" id="clock_widget">
 	<div class="detail-card card hoverable s12">
 		<div class="card-content">
 			<div class="row s12">

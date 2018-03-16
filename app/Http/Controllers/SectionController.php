@@ -28,14 +28,16 @@ class SectionController extends Controller
         $section = Section::all();
 
         $sections = DB::table('sections as s')
-            ->select('s.id','s.name','teachers.firstname as teacher_firstname', 'teachers.lastname as teacher_lastname', 's.timefrom', 's.timeto','s.room', 's.studentlimit', 'classes.name as class_name', 's.notes', 's.description', 's.status', 'schools.name as school_name')
+            ->selectRaw('s.id,s.name,teachers.firstname as teacher_firstname, teachers.lastname as teacher_lastname, s.timefrom, s.timeto,s.room, s.studentlimit, classes.name as class_name, s.notes, s.description, s.status, schools.name as school_name, COUNT(DISTINCT(admissions.id)) as student_count')
             ->leftJoin('classes', 's.classes_id','=', 'classes.id')
             ->leftJoin('schools', 'classes.school_id', '=', 'schools.id')
             ->leftJoin('teachers', 's.teacher_id', '=', 'teachers.id')
+            ->leftJoin('admissions', 'admissions.section_id', '=', 's.id')
             ->orderby('s.name','asc')
             ->when(Auth::user()->access_id != 0, function ($query) use ($user_school_id) {
                 return $query->where('classes.school_id', $user_school_id);
             })
+            ->groupBy('s.id')
             ->get();
 
         return view('pages.section.sections')->with(['sections'=>$sections, 'fullpage'=>$fullpage, 'page'=>'index']);

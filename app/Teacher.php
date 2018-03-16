@@ -17,7 +17,7 @@ class Teacher extends Model
     }
 
     public function classes(){
-    	return $this->hasOne('App\Classes');
+    	return $this->hasMany('App\Classes');
     }
 
     public function teachers(){
