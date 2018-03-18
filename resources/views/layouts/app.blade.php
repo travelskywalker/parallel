@@ -23,54 +23,10 @@
 </head>
 <body @if(Auth::check()) class="{{Auth::user()->theme}}" @endif>
 
-  <div id="print_div"></div>
 
-  <!-- Modal Structure -->
-  <div id="search_modal" class="modal modal-fixed-header search-page-modal custom-modal">
-    <div class="modal-header">
-      <div class="row s12">
-        <i class="material-icons right close modal-close waves-effect" title="close">close</i>
-        <div class="col s12">
-          <div class="input-field">
-                <input id="search" name="search" type="text" class="validate" onkeyup="search()">
-                <label for="search">Search</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-content">
-      <div class="modal-content-container">
-        <div class="col s12">
-            <div class="result-container">
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- <div class="search-page-modal custom-modal">
-    <div class="search-container hoverable">
-      <i class="material-icons right close" title="close">close</i>
-      <div class="row s12">
-
-        <div class="col s12">
-          <div class="input-field col s12">
-                <input id="search" name="search" type="text" class="validate" onkeyup="search()">
-                <label for="search">Search</label>
-          </div>
-        </div>
-
-        <div class="col s12">
-            <div class="result-container">
-
-            </div>
-        </div>
-
-      </div>
-    </div>
-  </div> -->
-
-
+@if(!Auth::check())
+  @yield('login-content')
+@else
     <div id="app" class="@if(!Auth::check()) login @endif">
         <!-- <main class="py-4">
             @yield('content')
@@ -153,8 +109,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
+@endif
     <!-- Modal Structure -->
       <div id="edit_modal" class="modal modal-fixed-footer">
         <div class="modal-content">
@@ -169,9 +124,6 @@
       </div>
 
 
-
-
-      @if(!Auth::check()) @include('auth.loginwidget') @endif
     <!-- Scripts -->
     <script
     src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>

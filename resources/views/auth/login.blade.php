@@ -1,7 +1,42 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="row">
+
+@section('login-content')
+
+<div class="wrapper">
+  <form class="login" method="POST" action="{{ route('login') }}">
+    @csrf
+    <p class="title center">Log in to Parallel</p>
+    @if ($errors->has('email'))
+        <span class="invalid-feedback">
+            <strong>{{ $errors->first('email') }}</strong>
+        </span>
+    @endif
+    <input placeholder="Email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus/>
+    <i class="fa fa-user"></i>
+
+    @if ($errors->has('password'))
+        <span class="invalid-feedback">
+            <strong>{{ $errors->first('password') }}</strong>
+        </span>
+    @endif
+    <input placeholder="Password" id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+    <i class="fa fa-key"></i>
+    <button>
+      <i class="spinner"></i>
+      <span class="state login-btn">Log in</span>
+    </button>
+
+    <button id="login" type="submit" class="btn btn-primary hide">
+        Login
+    </button>
+  </form>
+  </p>
+</div>
+
+
+
+<!-- <div class="row">
   <div class="col s6 offset-s3">
     <div class="card-panel">
         <div class="row">
@@ -53,7 +88,7 @@
                     </form>
     </div>
   </div>
-</div>
+</div> -->
 
 
 @endsection
