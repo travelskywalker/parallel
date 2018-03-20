@@ -463,6 +463,6 @@ footer a, footer a:link {
   text-decoration: none;
 }
 
-
-
-
+.guest .page-footer, .guest .page-footer .footer-copyright{
+  background: transparent;
+}

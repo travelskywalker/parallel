@@ -21,11 +21,12 @@
     @if(Auth::check()) <link href="/css/themes/{{Auth::user()->theme}}/style.css" rel="stylesheet"> @endif
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 </head>
-<body @if(Auth::check()) class="{{Auth::user()->theme}}" @endif>
+<body @if(Auth::check()) class="{{Auth::user()->theme}}" @else class="guest" @endif>
 
 
 @if(!Auth::check())
   @yield('login-content')
+  @include('components.footer')
 @else
     <div id="app" class="@if(!Auth::check()) login @endif">
         <!-- <main class="py-4">
