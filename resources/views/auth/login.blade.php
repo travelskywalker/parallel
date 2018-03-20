@@ -41,7 +41,7 @@
     <div class="card-panel">
         <div class="row">
             <h5 class="center">
-                Login to your Parallel Account test
+                Login to your Parallel Account
             </h5>
         </div>
       <form method="POST" action="{{ route('login') }}">
