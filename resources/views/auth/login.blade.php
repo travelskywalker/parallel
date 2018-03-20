@@ -3,7 +3,7 @@
 
 @section('login-content')
 
-<div class="wrapper">
+<!-- <div class="wrapper">
   <form class="login" method="POST" action="{{ route('login') }}">
     @csrf
     <p class="title center">Log in to Parallel</p>
@@ -32,11 +32,11 @@
     </button>
   </form>
   </p>
-</div>
+</div> -->
 
 
 
-<!-- <div class="row">
+<div class="row">
   <div class="col s6 offset-s3">
     <div class="card-panel">
         <div class="row">
@@ -88,7 +88,7 @@
                     </form>
     </div>
   </div>
-</div> -->
+</div>
 
 
 @endsection
