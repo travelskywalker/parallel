@@ -12,7 +12,7 @@
             <strong>{{ $errors->first('email') }}</strong>
         </span>
     @endif
-    <input placeholder="Email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus/>
+    <input placeholder="Email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" id="email" name="email" value="{{ old('email') }}" required autofocus/>
     <i class="fa fa-user"></i>
 
     @if ($errors->has('password'))
@@ -22,14 +22,12 @@
     @endif
     <input placeholder="Password" id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
     <i class="fa fa-key"></i>
-    <button>
+    <button >
       <i class="spinner"></i>
-      <span class="state login-btn">Log in</span>
+      <span class="state">Log in</span>
     </button>
 
-    <button id="login" type="submit" class="btn btn-primary hide">
-        Login
-    </button>
+    
   </form>
   </p>
 </div> -->
