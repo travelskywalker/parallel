@@ -1,3 +1,4 @@
+
 @if($fullpage)
 	@include('pages.teacher.index')
 @else
