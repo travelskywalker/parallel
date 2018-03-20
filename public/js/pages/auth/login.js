@@ -1,23 +1,18 @@
 var working = false;
-$('.login').on('submit', function(e) {
+
+
+
+$('button').click(function(e) {
+  if($('#email').val() == '' || $('#password').val() == '' ) return;
+
   e.preventDefault();
   if (working) return;
   working = true;
-  var $this = $(this),
+  var $this = $('.login'),
     $state = $this.find('button > .state');
   $this.addClass('loading');
   $state.html('Authenticating');
   setTimeout(function() {
-    $this.addClass('ok');
-    $state.html('Welcome back!');
-    setTimeout(function() {
-
-      // window.location.reload();
-      login();
-      $state.html('Log in');
-      $this.removeClass('ok loading');
-      working = false;
-
-    }, 4000);
-  }, 3000);
+    $('.login').submit();
+  }, 2000);
 });

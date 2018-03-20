@@ -134,6 +134,7 @@
     <script src="{{ asset('js/routes.js') }}"></script>
     <script src="{{ asset('js/vars.js') }}"></script>
     <script src="{{ asset('js/default.js') }}"></script>
+    @if(!Auth::check()) <script src="{{ asset('js/pages/auth/login.js') }}"></script> @endif
 
     @yield('pagescript')
 </body>
