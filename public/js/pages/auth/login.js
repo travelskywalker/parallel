@@ -1,7 +1,5 @@
 var working = false;
 
-
-
 $('button').click(function(e) {
   if($('#email').val() == '' || $('#password').val() == '' ) return;
 
