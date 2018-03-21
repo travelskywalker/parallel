@@ -49,6 +49,11 @@ class TeacherController extends Controller
             'licensenumber' => 'unique:teachers',
         ]);
 
+        if($request->image == null){
+            $defaultimage = 'files/images/default/nophoto.jpeg';
+            $request->image = $defaultimage;
+        }
+
         // create school data
         $teacher = Teacher::create($request->all());
 
@@ -128,9 +133,11 @@ class TeacherController extends Controller
      * @param  \App\Teachers  $teachers
      * @return \Illuminate\Http\Response
      */
-    public function edit(Teachers $teachers)
+    public function edit($id)
     {
-        //
+        $teacher = Teacher::find($id);
+
+        return view('pages.teacher.edit')->with(['teacher'=>$teacher]);
     }
 
     /**
@@ -140,9 +147,15 @@ class TeacherController extends Controller
      * @param  \App\Teachers  $teachers
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Teachers $teachers)
+    public function update(Request $request, $id)
     {
-        //
+        $teacher = Teacher::find($id);
+
+        // var_dump($request->image);
+
+        $teacher->update($request->all());
+
+        return response()->json(['message'=>'Teacher has been updated']);
     }
 
     /**

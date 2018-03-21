@@ -140,8 +140,6 @@ class AdmissionController extends Controller
             'description' => $request->description,
         ]);
 
-        // $student->save(['nationality', 'momomomomomomomo']);
-
         if($request->image != null){
             $image = app(\App\Http\Controllers\UploadController::class)->imageUpload('files/'.$request->school_id.'/images/student/'.$student->id.'/',$request->image);
 

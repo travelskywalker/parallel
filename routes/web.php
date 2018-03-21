@@ -42,8 +42,14 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('/teacher/add', 'TeacherController@shownewteacher');
 	Route::get('/s/teacher/add', 'TeacherController@api_shownewteacher');
 
+	Route::get('/teacher/{id}/edit', 'TeacherController@edit');
+	Route::post('/teacher/{id}/update', 'TeacherController@update');
+
+
 	Route::get('/teacher/{id}', 'TeacherController@show');
 	Route::get('/s/teacher/{id}', 'TeacherController@api_show');
+
+
 
 	
 

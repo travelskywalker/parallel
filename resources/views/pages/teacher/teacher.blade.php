@@ -8,7 +8,7 @@
     	<div class="card-content">
 	    	<div class="row s12">
 		      <div class="col s4">
-		      	<div class="image-container" @if($teacher->image != null) style="background: url('/{{$teacher->image}}')" @endif></div>
+		      	<div class="image-container" style="background: url('/{{$teacher->image}}')"></div>
 		      </div>
 		      <span class="activator"><i class="material-icons right">more_vert</i></span>
 		      <div class="col s8">

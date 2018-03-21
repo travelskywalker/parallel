@@ -32,8 +32,13 @@ class UploadController extends Controller
     	$newfile = $baseUrl.$filename;
 
     	// php
-    	rename($imgUrl, $newfile);
-
+        if($imgUrl == 'files/images/default/nophoto.jpeg'){
+            copy($imgUrl, $newfile);
+        }
+        else{
+            rename($imgUrl, $newfile);
+        }
+    	
     	return $newfile;
     }
 

@@ -121,11 +121,14 @@ function systemSettingsEdit(type){
 	openSystemEditModal(type);
 }
 
-function saveEdit(){
+function saveEdit(type){
 	var form = $('#edit_modal').find('form').attr('id');
 	var url = $('#'+form).attr('sendform-url');
 
-	sendForm(form, url, 'users').then(function(response){
+	console.log(form);
+	console.log(url);
+
+	sendForm(form, url, type).then(function(response){
 		console.log(response);
 	})
 	.catch(function(error){

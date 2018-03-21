@@ -12,7 +12,7 @@
 	</form>
 
 	<form id="admission_form">
-		<input type="hidden" name="image" id="image">
+		<input type="hidden" name="image" id="image" value="files/images/default/nophoto.jpeg">
 		<div class="row s12">
 		    <div class="col s12">
 		      <div class="card hoverable">

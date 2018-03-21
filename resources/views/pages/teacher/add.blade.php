@@ -13,7 +13,7 @@
 </form>
 
 	<form id="add_teacher_form">
-		<input type="hidden" name="image" id="image">
+		<input type="hidden" name="image" id="image" value="files/images/default/nophoto.jpeg">
 
 		<div class="row s12">
 		    <div class="col s12">
@@ -21,7 +21,7 @@
 		        <div class="card-content">
 		        	<div class="row">
 		        		<div class="col s4">
-		        			<div class="add-image-container" id="image_container" activates="image_upload">please upload square photo to ensure image compatibility</div>
+		        			<div class="add-image-container" id="image_container" activates="image_upload" style="background: url('/files/images/default/nophoto.jpeg')">please upload square photo to ensure image compatibility</div>
 		        		</div>
 		        		<div class="col s8">
 		        			<div class="col s12">

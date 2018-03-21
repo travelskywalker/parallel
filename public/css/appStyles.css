@@ -120,9 +120,16 @@
 
     #edit_modal h4{
     	position: fixed;
-        width: 100%;
-        background: #fafafa;
-        z-index: 1;
+      width: 100%;
+      background: #fafafa;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      padding: 1rem;
+    }
+
+    #edit_modal .modal-content-container{
+      margin-top: 3rem;
     }
 
     .system-tab {

@@ -1,7 +1,7 @@
 
 <div class="row">
 	<div class="col s4">
-		<div class="add-image-container" id="image_container" activates="image_upload" >please upload square photo to ensure image compatibility</div>
+		<div class="add-image-container" id="image_container" activates="image_upload" style="background: url('/files/images/default/nophoto.jpeg')">please upload square photo to ensure image compatibility</div>
 	</div>
 	<div class="col s6">
 		<div class="input-field col ">
