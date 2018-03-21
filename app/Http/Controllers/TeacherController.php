@@ -43,16 +43,11 @@ class TeacherController extends Controller
     {
         // validate data
         $validatedData = $request->validate([
+            'school_id' => 'required',
             'firstname' => 'required',
             'middlename' => 'required',
             'lastname' => 'required',
-            'licensenumber' => 'unique:teachers',
         ]);
-
-        if($request->image == null){
-            $defaultimage = 'files/images/default/nophoto.jpeg';
-            $request->image = $defaultimage;
-        }
 
         // create school data
         $teacher = Teacher::create($request->all());
@@ -75,6 +70,18 @@ class TeacherController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function licensenumberexist($licensenumber){
+        $licenseExist = Teacher::where('licensenumber', $licensenumber)->exists();
+
+        return response()->json($licenseExist);
+    }
+
+    public function teachernumberexist($teachernumber, $school_id){
+        $numberExist = Teacher::where('teachernumber', $teachernumber)->where('school_id', $school_id)->exists();
+
+        return response()->json($numberExist);
     }
 
     /**
