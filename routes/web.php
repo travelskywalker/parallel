@@ -64,6 +64,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('/s/classes/add', 'ClassesController@api_shownewclassesview');
 
 	Route::get('/classes/{id}/edit', 'ClassesController@edit');
+	Route::post('/classes/{id}/update', 'ClassesController@update');
 
 	Route::get('/classes/{id}', 'ClassesController@show');
 	Route::get('/s/classes/{id}', 'ClassesController@api_show');
@@ -76,6 +77,9 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::get('/section/add', 'SectionController@shownewsection');
 	Route::get('/s/section/add', 'SectionController@api_shownewsection');
+
+	Route::get('/section/{id}/edit', 'SectionController@edit');
+	Route::post('/section/{id}/update', 'SectionController@update');
 
 	Route::get('/section/{id}', 'SectionController@show');
 	Route::get('/s/section/{id}', 'SectionController@api_show');

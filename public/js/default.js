@@ -520,7 +520,7 @@ function editBtn(){
 
 	if(page.indexOf('teacher') > -1) type = 'teacher';
 	else if (page.indexOf('student') > -1) type = 'student';
-	else if (page.indexOf('class') > -1 ) type = 'class';
+	else if (page.indexOf('class') > -1 ) type = 'classes';
 	else if(page.indexOf('section') > -1) type = 'section';
 	else if(page.index('admission') > -1) type = 'admission';
 	else type = 'school';

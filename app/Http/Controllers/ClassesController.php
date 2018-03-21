@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Section;
 use App\Classes;
 use App\School;
+use App\Teacher;
 use App\Http\Resources\Classes as ClassesResources;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -154,9 +155,15 @@ class ClassesController extends Controller
      * @param  \App\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function edit(Classes $classes)
+    public function edit($id)
     {
-        //
+        $user_school_id = Auth::user()->school_id;
+
+        $class = Classes::find($id);
+
+        $teachers = Teacher::where('school_id', $class->school_id)->get();
+
+        return view('pages.classes.edit')->with(['class'=>$class, 'teachers'=>$teachers]);
     }
 
     /**
@@ -166,9 +173,17 @@ class ClassesController extends Controller
      * @param  \App\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Classes $classes)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+        ]);
+
+        $class = Classes::find($id);
+
+        $class->update($request->all());
+
+        return response()->json(['data'=>$class, 'message'=>'Class has been updated']);
     }
 
     /**
