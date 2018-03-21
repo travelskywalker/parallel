@@ -27,8 +27,8 @@
 			    <td>{{$section->name}}</td>
 			    <td>{{$section->class_name}}</td>
 			    <td>{{$section->teacher_firstname}} {{$section->teacher_lastname}}</td>
-			    <td>{{$section->timefrom}}</td>
-			    <td>{{$section->timeto}}</td>
+			    <td>{{Carbon\Carbon::parse($section->timefrom)->format('h:i A')}}</td>
+			    <td>{{Carbon\Carbon::parse($section->timeto)->format('h:i A')}}</td>
 			    <td>{{$section->room}}</td>
 			    <td>{{$section->student_count}}</td>
 			    <td>{{$section->studentlimit}}</td>

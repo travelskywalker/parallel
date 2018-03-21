@@ -43,10 +43,10 @@ class TeacherController extends Controller
     {
         // validate data
         $validatedData = $request->validate([
+            'school_id' => 'required',
             'firstname' => 'required',
             'middlename' => 'required',
             'lastname' => 'required',
-            'licensenumber' => 'unique:teachers',
         ]);
 
         // create school data
@@ -70,6 +70,18 @@ class TeacherController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function licensenumberexist($id, $licensenumber){
+        $licenseExist = Teacher::where('licensenumber', $licensenumber)->where('id', '!=', $id)->exists();
+
+        return response()->json($licenseExist);
+    }
+
+    public function teachernumberexist($id, $teachernumber, $school_id){
+        $numberExist = Teacher::where('teachernumber', $teachernumber)->where('school_id', $school_id)->where('id', '!=', $id)->exists();
+
+        return response()->json($numberExist);
     }
 
     /**
@@ -128,9 +140,11 @@ class TeacherController extends Controller
      * @param  \App\Teachers  $teachers
      * @return \Illuminate\Http\Response
      */
-    public function edit(Teachers $teachers)
+    public function edit($id)
     {
-        //
+        $teacher = Teacher::find($id);
+
+        return view('pages.teacher.edit')->with(['teacher'=>$teacher]);
     }
 
     /**
@@ -140,9 +154,21 @@ class TeacherController extends Controller
      * @param  \App\Teachers  $teachers
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Teachers $teachers)
+    public function update(Request $request, $id)
     {
-        //
+
+        // validate data
+        $validatedData = $request->validate([
+            'firstname' => 'required',
+            'middlename' => 'required',
+            'lastname' => 'required',
+        ]);
+
+        $teacher = Teacher::find($id);
+
+        $teacher->update($request->all());
+
+        return response()->json(['message'=>'Teacher has been updated']);
     }
 
     /**

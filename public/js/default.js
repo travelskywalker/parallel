@@ -37,10 +37,12 @@ function loadIndex(){
 	loadContent('/s'+app.path);
 }
 
-function openEditModal(url){
+function openEditModal(url, type){
 	$('#edit_modal').modal('open');
 
-	$('.modal-content-container').html(loader());
+	$('#edit_modal .modal-content-container').html(loader());
+
+	$('#edit_modal .save-btn').attr('onClick', 'saveEdit(\''+type+'\')');
 
 	sendAPI('GET', url).then(function(response){
 		$('.modal-content-container').html(response);
@@ -48,8 +50,9 @@ function openEditModal(url){
 		init();
 	})
 	.catch(function(error){
+		console.log(error.responseText);
 		$('#edit_modal').modal('close');
-		errorMsg(lang.somethingwentwrong);
+		errorMsg(language.somethingwentwrong);
 	});
 }
 
@@ -409,7 +412,6 @@ function sendForm(form, url, successpage){
 			}
 
 			showToast(response.message);
-
 			if(successpage){
 				setTimeout(function(){
 					// window.location.href="/users";
@@ -512,7 +514,18 @@ function addBtn(){
 }
 
 function editBtn(){
-	alert('open edit view');
+
+	var type;
+	var page = window.location.pathname;
+
+	if(page.indexOf('teacher') > -1) type = 'teacher';
+	else if (page.indexOf('student') > -1) type = 'student';
+	else if (page.indexOf('class') > -1 ) type = 'classes';
+	else if(page.indexOf('section') > -1) type = 'section';
+	else if(page.index('admission') > -1) type = 'admission';
+	else type = 'school';
+
+	openEditModal(page+'/edit', type);
 }
 
 function tutorial(){

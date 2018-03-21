@@ -39,6 +39,10 @@ function init(){
 		}
 	});
 
+	$('select#teacher_id').change(function(){
+		console.log($(this).val())
+	});
+
 
 
 }

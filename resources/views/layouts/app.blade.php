@@ -120,7 +120,7 @@
         </div>
         <div class="modal-footer">
             <a class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
-          <a class="modal-action waves-effect waves-green btn-flat" onclick="saveEdit();">Save</a>
+          <a class="modal-action waves-effect waves-green btn-flat save-btn" >Save</a>
         </div>
       </div>
 

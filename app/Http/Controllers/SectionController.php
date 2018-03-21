@@ -176,9 +176,15 @@ class SectionController extends Controller
      * @param  \App\Sections  $sections
      * @return \Illuminate\Http\Response
      */
-    public function edit(Section $section)
+    public function edit($id)
     {
-        //
+        $section = Section::find($id);
+
+        $classes = Classes::where('school_id', $section->school_id)->get();
+
+        $teachers = Teacher::where('school_id', $section->school_id)->get();
+
+        return view('pages.section.edit')->with(['section'=>$section, 'classes'=>$classes, 'teachers'=>$teachers]);
     }
 
     /**
@@ -188,9 +194,21 @@ class SectionController extends Controller
      * @param  \App\Sections  $sections
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sections $sections)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'timefrom' => 'required',
+            'timeto' => 'required',
+        ]);
+
+        $section = Section::find($id);
+
+        $section->update($request->all());
+
+        return response()->json(['data'=>$section, 'message'=>'Section has been updated']);
+
+
     }
 
     /**
