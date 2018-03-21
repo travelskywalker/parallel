@@ -43,8 +43,8 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('/teacher/{id}/edit', 'TeacherController@edit');
 	Route::post('/teacher/{id}/update', 'TeacherController@update');
 
-	Route::get('/s/teacher/{licensenumber}/findlicense', 'TeacherController@licensenumberexist');
-	Route::get('/s/teacher/{teachernumber}/{school_id}/findteachernumber', 'TeacherController@teachernumberexist');
+	Route::get('/s/teacher/{id}/{licensenumber}/findlicense', 'TeacherController@licensenumberexist');
+	Route::get('/s/teacher/{id}/{teachernumber}/{school_id}/findteachernumber', 'TeacherController@teachernumberexist');
 
 	Route::get('/teacher/{id}', 'TeacherController@show');
 	Route::get('/s/teacher/{id}', 'TeacherController@api_show');
@@ -62,6 +62,8 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::get('/classes/add', 'ClassesController@shownewclassesview');
 	Route::get('/s/classes/add', 'ClassesController@api_shownewclassesview');
+
+	Route::get('/classes/{id}/edit', 'ClassesController@edit');
 
 	Route::get('/classes/{id}', 'ClassesController@show');
 	Route::get('/s/classes/{id}', 'ClassesController@api_show');

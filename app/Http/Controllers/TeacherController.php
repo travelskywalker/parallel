@@ -72,14 +72,14 @@ class TeacherController extends Controller
         //
     }
 
-    public function licensenumberexist($licensenumber){
-        $licenseExist = Teacher::where('licensenumber', $licensenumber)->exists();
+    public function licensenumberexist($id, $licensenumber){
+        $licenseExist = Teacher::where('licensenumber', $licensenumber)->where('id', '!=', $id)->exists();
 
         return response()->json($licenseExist);
     }
 
-    public function teachernumberexist($teachernumber, $school_id){
-        $numberExist = Teacher::where('teachernumber', $teachernumber)->where('school_id', $school_id)->exists();
+    public function teachernumberexist($id, $teachernumber, $school_id){
+        $numberExist = Teacher::where('teachernumber', $teachernumber)->where('school_id', $school_id)->where('id', '!=', $id)->exists();
 
         return response()->json($numberExist);
     }
@@ -156,9 +156,15 @@ class TeacherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $teacher = Teacher::find($id);
 
-        // var_dump($request->image);
+        // validate data
+        $validatedData = $request->validate([
+            'firstname' => 'required',
+            'middlename' => 'required',
+            'lastname' => 'required',
+        ]);
+
+        $teacher = Teacher::find($id);
 
         $teacher->update($request->all());
 

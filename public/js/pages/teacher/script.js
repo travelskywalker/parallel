@@ -18,7 +18,7 @@ function init(){
 }
 
 function checkTeacherNumber(){
-	var url = '/s/teacher/'+$('#teachernumber').val()+'/'+$('#school_id').val()+'/findteachernumber';
+	var url = '/s/teacher/'+$('#teacher_id').val()+'/'+$('#teachernumber').val()+'/'+$('#school_id').val()+'/findteachernumber';
 	var _self = $('#teachernumber');
 
 	if($('#teachernumber').val() == null || $('#teachernumber').val() == '') return;
@@ -36,7 +36,7 @@ function checkTeacherNumber(){
 }
 
 function checkLicenseNumber(){
-	var url = '/s/teacher/'+$('#licensenumber').val()+'/findlicense';
+	var url = '/s/teacher/'+$('#teacher_id').val()+'/'+$('#licensenumber').val()+'/findlicense';
 	var _self = $('#licensenumber');
 
 	if($('#licensenumber').val() == null || $('#licensenumber').val() == '') return;

@@ -42,7 +42,7 @@ function openEditModal(url, type){
 
 	$('#edit_modal .modal-content-container').html(loader());
 
-	$('#edit_modal .modal-action').attr('onClick', 'saveEdit(\''+type+'\')');
+	$('#edit_modal .save-btn').attr('onClick', 'saveEdit(\''+type+'\')');
 
 	sendAPI('GET', url).then(function(response){
 		$('.modal-content-container').html(response);
