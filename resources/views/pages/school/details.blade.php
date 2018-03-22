@@ -1,35 +1,65 @@
 @if($fullpage)
 	@include('pages.school.index')
 @else
-<!-- <div class="card">
-	<div class="card-content"> -->
+
+
+
 		<div class="row s12">
-			<div class="col s2">
-				<img width="100" height="100" class="materialboxed" src="/{{$school->logo}}">
-			</div>
-			<div>
-				<h4>  {{$school->name}}</h4>
-					@if($school->title1) <p>{{$school->title1}}</p> @endif
-			  		@if($school->title2) <p>{{$school->title2}}</p> @endif
-			</div>
-		</div>
-		<div class="row s12">
-			<div class="col s12">
-				<p><b>School Administrator:</b> {{$school->admin}}</p>
-			</div>
-			<div class="col s4">
-				<p><b>Email:</b> {{$school->email}}</p>
-			</div>
-			<div class="col s4">
-				<p><b>Phone Number:</b> {{$school->phonenumber}}</p>
-			</div>
-			<div class="col s4">
-				<p><b>Mobile Number:</b> {{$school->mobilenumber}}</p>
-			</div>
-			<div class="col s12">
-				  <p><b>Address:</b> {{$school->address}}</p>
-			</div>
-		</div>
+	      <div class="col s12 ">
+	        <div class="card-panel detail-card">
+	          <table>
+	          	<tr>
+	          		<td colspan="2" style="text-align: left">
+						<div class="col s2">
+							<img width="100" height="100" class="materialboxed" src="/{{$school->logo}}">
+						</div>
+						<div class="col s10">
+							<h4>  {{$school->name}}</h4>
+								@if($school->title1) <p>{{$school->title1}}</p> @endif
+						  		@if($school->title2) <p>{{$school->title2}}</p> @endif
+						</div>
+	          		</td>
+	          	</tr>
+	          	<tr>
+	          		<td>Administrator <i class="material-icons small">person</i></td>
+	          		<td>{{$school->admin}}</td>
+	          	</tr>
+	          	<tr>
+	          		<td>Email <i class="material-icons small">email</i></td>
+	          		<td>{{$school->email}}</td>
+	          	</tr>
+	          	<tr>
+	          		<td>Phone Number <i class="material-icons small">phone</i></td>
+	          		<td>{{$school->phonenumber}}</td>
+	          	</tr>
+	          	<tr>
+	          		<td>Mobile Number <i class="material-icons small">phone_iphone</i></td>
+	          		<td>{{$school->mobilenumber}}</td>
+	          	</tr>
+	          	<tr>
+	          		<td>Address <i class="material-icons small">location_on</i></td>
+	          		<td>{{$school->address}}</td>
+	          	</tr>
+	          	<tr>
+	          		<td>City<i class="material-icons small">location_city</i></td>
+	          		<td>{{$school->city}}</td>
+	          	</tr>
+
+	          	@if(Auth::user()->access_id <= 2)
+	          	<tr>
+	          		<td>Notes <i class="material-icons small">note</i></td>
+	          		<td>{{$school->notes}}</td>
+	          	</tr>
+	          	<tr>
+	          		<td>Description <i class="material-icons small">description</i></td>
+	          		<td>{{$school->description}}</td>
+	          	</tr>
+	          	@endif
+
+	          </table>
+	        </div>
+	      </div>
+	    </div>
 
 		<div class="row s12">
 			<div class="col s4">
@@ -141,9 +171,6 @@
 
 			
 		</div>
-<!-- 	</div>
-</div> -->
-
 
 	@include('action-menu.menu',array( 'menus'=> ['print','edit' ]) )
 

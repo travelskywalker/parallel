@@ -497,6 +497,22 @@ footer a, footer a:link {
   padding: 5px;
 }
 
+/*detail card*/
+.detail-card td:nth-child(1){
+  width: 20%;
+  text-align: right;
+}
+.detail-card td:nth-child(2){
+  background: #dedede;
+  font-weight: 300;
+}
+.detail-card td{
+  padding: 5px;
+}
+.detail-card td i{
+  vertical-align: bottom;
+}
+
 
 /*change theme*/
 .theme-container {
