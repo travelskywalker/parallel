@@ -80,6 +80,20 @@ function search(){
 	}
 }
 
+function accountDetails(){
+	var title = 'Account Details';
+	var url = '/system/account/details';
+
+	sendAPI('GET',url ).then(function(response){
+		console.log(response);
+		console.log(title);
+		openOkModal(title, response);
+	})
+	.catch(function(error){
+		errorMsg(language.somethingwentwrong);
+	});
+}
+
 function systemSettingsSave(type){
 	var attr = systemEditAttribute(type);
 	var data = $('#system_'+type+' form').serialize();
@@ -122,14 +136,19 @@ function systemSettingsEdit(type){
 }
 
 function saveEdit(type){
+
 	var form = $('#edit_modal').find('form').attr('id');
 	var url = $('#'+form).attr('sendform-url');
 
 	sendForm(form, url, type).then(function(response){
+
 		console.log(response);
+
 	})
 	.catch(function(error){
+
 		errorMsg(lang.somethingwentwrong);
+
 	});
 }
 
@@ -142,9 +161,10 @@ function updateUrlBar(url){
 }
 
 function editDetails(page, id){
-	// window.location.href = '/'+page+'/edit/'+id;
+	
 	url = '/'+page+'/edit/'+id;
 	loadContent(url);
+
 }
 
 function formInit(){

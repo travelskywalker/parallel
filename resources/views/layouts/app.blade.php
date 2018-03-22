@@ -110,7 +110,11 @@
                 </div>
             </div>
         </div>
+
+        @include('components.modal')
 @endif
+
+
     <!-- Modal Structure -->
       <div id="edit_modal" class="modal modal-fixed-footer">
         <div class="modal-content">

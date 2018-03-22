@@ -33,6 +33,15 @@ function systemModal(){
 	return modal;
 }
 
+function openOkModal(title, content){
+
+	$('#ok_modal').modal('open');
+
+	$('#ok_modal h4').html(title);
+
+	$('#ok_modal .modal-content-container').html(content);
+}
+
 function loadIndex(){
 	loadContent('/s'+app.path);
 }
@@ -400,24 +409,28 @@ function checkFormError(form){
 function sendForm(form, url, successpage){
 	var data = $('#'+form).serializeArray();
 
-	console.log(data);
-
 	if(!checkFormError(form)){
 
 		sendAPI('POST', url, data).then(function(response){
 
 			if($('.error-data').html() != ''){
+
 				$('.error-data').html('');
 				$('.error-message').html('');
+
 			}
 
 			showToast(response.message);
 			if(successpage){
+
 				setTimeout(function(){
-					// window.location.href="/users";
+
 					window.location.href= '/'+successpage;
+
 				}, 1000);
+
 			}
+
 		})
 		.catch(function(error){
 			
@@ -425,14 +438,20 @@ function sendForm(form, url, successpage){
 
 			$('.error-message').html(err.message);
 			$('.error-data').html('');
+
 			$.each(err.errors, function(key, val){
+
 				$('.error-data').append('<li>'+val+'</li>');
+
 			});
 
 			$('html, body').animate({ scrollTop: 0 }, 'slow');
 		});
+
 	}else{
+
 		showToast(language.errorinform);
+
 	}
 }
 
@@ -515,15 +534,15 @@ function addBtn(){
 
 function editBtn(){
 
-	var type;
 	var page = window.location.pathname;
+	var type = page.substring(1);
 
-	if(page.indexOf('teacher') > -1) type = 'teacher';
-	else if (page.indexOf('student') > -1) type = 'student';
-	else if (page.indexOf('class') > -1 ) type = 'classes';
-	else if(page.indexOf('section') > -1) type = 'section';
-	else if(page.index('admission') > -1) type = 'admission';
-	else type = 'school';
+	// if(page.indexOf('teacher') > -1) type = 'teacher';
+	// else if (page.indexOf('student') > -1) type = 'student';
+	// else if (page.indexOf('class') > -1 ) type = 'classes';
+	// else if(page.indexOf('section') > -1) type = 'section';
+	// else if(page.indexOf('admission') > -1) type = 'admission';
+	// else type = 'school';
 
 	openEditModal(page+'/edit', type);
 }

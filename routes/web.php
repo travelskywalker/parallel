@@ -26,6 +26,9 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('/school/add', 'SchoolController@shownewschool');
 	Route::get('/s/school/add', 'SchoolController@api_shownewschool');
 
+	Route::get('/school/{id}/edit', 'SchoolController@edit');
+	Route::post('/school/{id}/update', 'SchoolController@update');
+
 	Route::get('/school/{id}', 'SchoolController@show');
 	Route::get('/s/school/{id}', 'SchoolController@api_show');
 
@@ -140,6 +143,7 @@ Route::group(['middleware' => ['auth']], function() {
 	// system
 	Route::get('/system/search/{key}', 'SystemController@showresult');
 	Route::get('/system/contacts', 'SystemController@getContacts');
+	Route::get('/system/account/details', 'SystemController@accountDetails');
 
 
 	
