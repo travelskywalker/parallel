@@ -1,0 +1,5 @@
+getUserInfo();
+
+function init(){
+
+}

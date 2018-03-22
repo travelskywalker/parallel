@@ -45,7 +45,6 @@
 							</div>
 						@endif
 
-
 					  		<div class="input-field col s4" style="margin-top: 1rem">
 							    <select id="admission_class_id" name="classes_id">
 							      		<option value="" disabled selected>select class</option>
