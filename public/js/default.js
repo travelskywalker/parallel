@@ -54,7 +54,7 @@ function openEditModal(url, type){
 	$('#edit_modal .save-btn').attr('onClick', 'saveEdit(\''+type+'\')');
 
 	sendAPI('GET', url).then(function(response){
-		$('.modal-content-container').html(response);
+		$('#edit_modal .modal-content-container').html(response);
 		formInit();
 		init();
 	})
@@ -177,7 +177,6 @@ function image_upload_init(){
 		var data = new FormData($('#'+form)[0]);
 
 		uploadTempImg(url, data).then(function(response){
-
 			// append to container
 			$('#'+container).css({'background':'url("/'+response+'")'});
 			// add url to logo input

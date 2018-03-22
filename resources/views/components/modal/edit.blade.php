@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="modal-footer">
-      <a class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
+      <a class="modal-action modal-close waves-effect btn-flat ">Cancel</a>
     <a class="modal-action waves-effect btn-flat save-btn" >Save</a>
   </div>
 </div>
