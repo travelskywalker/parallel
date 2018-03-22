@@ -178,9 +178,11 @@ class SchoolController extends Controller
      * @param  \App\School  $school
      * @return \Illuminate\Http\Response
      */
-    public function edit(School $school)
+    public function edit($id)
     {
-        //
+        $school = School::find($id);
+
+        return view('pages.school.edit')->with(['school'=>$school]);
     }
 
     /**
@@ -190,9 +192,22 @@ class SchoolController extends Controller
      * @param  \App\School  $school
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, School $school)
+    public function update(Request $request, $id)
     {
-        //
+        // validate data
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'admin' => 'required',
+            'email' => 'required|email',
+            'phonenumber' => 'required',
+            'address' => 'required'
+        ]);
+
+        $school = School::find($id);
+
+        $school->update($request->all());
+
+        return response()->json(['data'=>$school, 'message'=>'School has been updated']);
     }
 
     /**

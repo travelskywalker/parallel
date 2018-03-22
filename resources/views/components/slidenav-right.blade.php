@@ -11,7 +11,21 @@
         <div class="collapsible-body">
           <ul>
             <!-- onclick="openChangePasswordView()" -->
-            <li><a class="valign-wrapper" onclick="systemSettingsEdit('changePassword')"><i class="material-icons">lock</i> Change Password</a></li>
+            <li>
+              <a class="valign-wrapper" onclick="systemSettingsEdit('changePassword')">
+                <i class="material-icons">lock</i>
+                Change Password
+              </a>
+            </li>
+
+            <li>
+              <a class="valign-wrapper" onclick="accountDetails()">
+                <i class="material-icons">person_outline</i>
+                Account Details
+              </a>
+            </li>
+
+
           </ul>
         </div>
       </li>
@@ -19,7 +33,12 @@
         <div class="collapsible-header"><i class="material-icons">settings</i>System</div>
         <div class="collapsible-body">
             <ul>
-                  <li ><a class="valign-wrapper" onclick="systemSettingsEdit('theme')"><i class="material-icons">color_lens</i> Theme</a></li>
+                  <li >
+                    <a class="valign-wrapper" onclick="systemSettingsEdit('theme')">
+                      <i class="material-icons">color_lens</i>
+                      Theme
+                    </a>
+                  </li>
 
                   <!-- <li ><a class="valign-wrapper"><i class="material-icons">add</i> Add User</a></li> -->
               </ul>

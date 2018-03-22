@@ -9,6 +9,9 @@ use App\Teacher;
 use App\Classes;
 use App\Section;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 class SystemController extends Controller
 {
     public function showresult($key){
@@ -44,5 +47,17 @@ class SystemController extends Controller
         $contacts = Student::all();
 
         return response()->json(['data'=>$contacts]);
+    }
+
+    public function accountDetails(){
+
+        $account = DB::table('users')
+                    ->selectRaw('users.*, accesses.name as access, schools.name as school')
+                    ->leftJoin('accesses', 'users.access_id', '=', 'accesses.id')
+                    ->leftJoin('schools', 'schools.id', '=', 'users.school_id')
+                    ->where('users.id', Auth::user()->id)
+                    ->get();
+
+        return view('pages.account.details')->with(['account'=>$account]);
     }
 }
