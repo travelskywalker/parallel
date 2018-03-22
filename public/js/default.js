@@ -47,7 +47,11 @@ function loadIndex(){
 }
 
 function openEditModal(url, type){
-	$('#edit_modal').modal('open');
+	$('#edit_modal').modal({
+		complete: function() { 
+			$('#edit_modal .modal-content-container').html('');
+		} 
+	}).modal('open');
 
 	$('#edit_modal .modal-content-container').html(loader());
 
