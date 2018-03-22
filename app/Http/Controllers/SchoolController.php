@@ -51,7 +51,7 @@ class SchoolController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'admin' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'phonenumber' => 'required',
             'address' => 'required'
         ]);
@@ -204,6 +204,14 @@ class SchoolController extends Controller
         ]);
 
         $school = School::find($id);
+
+
+        if($request->logo != $school->logo){
+            $logo = app(\App\Http\Controllers\UploadController::class)->imageUpload('files/'.$school->id.'/images/logo/',$request->logo);
+
+            $request->replace(array('logo' => $logo));
+
+        }
 
         $school->update($request->all());
 

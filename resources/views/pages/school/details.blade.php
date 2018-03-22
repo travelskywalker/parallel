@@ -29,11 +29,11 @@
 	          		<td>{{$school->email}}</td>
 	          	</tr>
 	          	<tr>
-	          		<td>Phone Number <i class="material-icons small">phone</i></td>
+	          		<td>Phone <i class="material-icons small">phone</i></td>
 	          		<td>{{$school->phonenumber}}</td>
 	          	</tr>
 	          	<tr>
-	          		<td>Mobile Number <i class="material-icons small">phone_iphone</i></td>
+	          		<td>Mobile <i class="material-icons small">phone_iphone</i></td>
 	          		<td>{{$school->mobilenumber}}</td>
 	          	</tr>
 	          	<tr>

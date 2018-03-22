@@ -7,6 +7,7 @@
 			<thead>
 			  <tr>
 			  	  <th>Teacher Number</th>
+			  	  <th></th>
 			      <th>Name</th>
 			      @if(Auth::user()->access_id == 0)<th>School</th> @endif
 			      <th>Notes</th>
@@ -20,7 +21,8 @@
 				@foreach ($teachers as $teacher)
 				<tr class="data-row" onclick="showDetails('teacher', {{$teacher->id}})">
 				<td>{{$teacher->teachernumber}}</td>
-			    <td>@if($teacher->image != null) <div class="thumb-image-container" style="background:url('{{$teacher->image}}')"></div> @endif {{$teacher->firstname}} {{$teacher->lastname}}</td>
+				<td>@if($teacher->image != null) <div class="thumb-image-container" style="background:url('/{{$teacher->image}}')"></div> @endif</td>
+			    <td>{{$teacher->firstname}} {{$teacher->lastname}}</td>
 			    @if(Auth::user()->access_id == 0)<td>{{$teacher->school_name}}</td>@endif
 			    <td>{{$teacher->notes}}</td>
 			    <td>{{$teacher->description}}</td>

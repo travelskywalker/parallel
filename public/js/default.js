@@ -401,7 +401,6 @@ function checkFormError(form){
 	    }
 	);
 
-
 	if(error.length == 0){
 		return false;
 	}else{
@@ -424,6 +423,7 @@ function sendForm(form, url, successpage){
 			}
 
 			showToast(response.message);
+			
 			if(successpage){
 
 				setTimeout(function(){
