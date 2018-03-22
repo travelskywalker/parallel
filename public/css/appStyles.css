@@ -496,3 +496,22 @@ footer a, footer a:link {
 .account-details td{
   padding: 5px;
 }
+
+
+/*change theme*/
+.theme-container {
+  height: 25px;
+}
+
+.theme-content{
+  width: 50%;
+  height: 100%;
+}
+
+.float-left{
+  float: left;
+}
+
+.float-right{
+  float:right;
+}
