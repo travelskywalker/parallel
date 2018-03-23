@@ -9,7 +9,7 @@
 
 
 @section('content')
-
+<div id="app-main"></div>
 <div class="col s8">
         <div class="detail-card card hoverable s12">
             <div class="card-content">
