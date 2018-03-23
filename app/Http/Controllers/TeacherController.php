@@ -166,6 +166,14 @@ class TeacherController extends Controller
 
         $teacher = Teacher::find($id);
 
+        if($request->image != $teacher->image){
+            $image = app(\App\Http\Controllers\UploadController::class)->imageUpload('files/'.$request->school_id.'/images/teacher/'.$teacher->id.'/',$request->image);
+
+
+            $request->replace(array('image' => $image));
+
+        }
+
         $teacher->update($request->all());
 
         return response()->json(['message'=>'Teacher has been updated']);

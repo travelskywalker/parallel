@@ -18,8 +18,8 @@
 		    <div class="col s12">
 		      <div class="card hoverable">
 		        <div class="card-content">
-		        	<div class="add-image-container" id="logo_container" activates="image_upload">please upload square photo to ensure image compatibility</div>
-					<input type="hidden" name="logo" id="logo">
+		        	<div class="add-image-container" id="logo_container" activates="image_upload" style="background: url('/files/images/default/nophoto.jpeg')">please upload square photo to ensure image compatibility</div>
+					<input type="hidden" name="logo" id="logo" value="files/images/default/nophoto.jpeg">
 		        	<div class="row">
 	          			<div class="col s12">
 					  		<div class="input-field col s12">

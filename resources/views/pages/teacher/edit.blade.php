@@ -6,7 +6,7 @@
 
 
 <form id="edit_teacher_form" sendform-url="/teacher/{{$teacher->id}}/update">
-	<input type="hidden" name="image" id="image" @if($teacher->image == null) value="files/images/default/nophoto.jpeg" @endif>
+	<input type="hidden" name="image" id="image" value="{{$teacher->image}}"
 	<input type="hidden" id="teacher_id" value="{{$teacher->id}}">
 	<input type="hidden" id="school_id" value="{{$teacher->school_id}}">
 

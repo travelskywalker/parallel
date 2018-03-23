@@ -127,5 +127,12 @@
     @if(!Auth::check()) <script src="{{ asset('js/pages/auth/login.js') }}"></script> @endif
 
     @yield('pagescript')
+
+    @if(Auth::check())
+    <!-- widget js -->
+    <script src="/js/widget/clock.js"></script>
+    <script src="/js/widget/search.js"></script>
+    <script src="/js/widget/contact.js"></script>
+    @endif
 </body>
 </html>

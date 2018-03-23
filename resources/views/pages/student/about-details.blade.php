@@ -79,17 +79,3 @@
 <label for="admission_religion">Religion</label>
 </div>
 </div>
-
-<div class="col s12">
-<div class="input-field col s12">
-<textarea id="admission_notes" name="notes" class="materialize-textarea" data-length="120" disabled>{{$student[0]->notes}}</textarea>
-<label for="admission_notes">Notes</label>
-</div>
-</div>
-
-<div class="col s12">
-<div class="input-field col s12">
-<textarea id="admission_description" name="description" class="materialize-textarea" data-length="120" disabled>{{$student[0]->description}}</textarea>
-<label for="admission_description">Description</label>
-</div>
-</div>

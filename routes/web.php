@@ -20,7 +20,14 @@ Route::group(['middleware' => ['auth']], function() {
 	    
 	});
 	
-	Route::get('/home', 'HomeController@index')->name('home');
+	// Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/home', function(){
+		return view('pages.home.home');
+	});
+
+	// Route::get('/s/home', function(){
+	// 	return view('pages.home.home');
+	// })
 
 	// school
 	Route::get('/school', 'SchoolController@index');
@@ -61,6 +68,9 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::get('/student/{id}', 'StudentController@show');
 	Route::get('/s/student/{id}', 'StudentController@api_show');
+
+	Route::get('/student/{id}/edit', 'StudentController@edit');
+	Route::get('/student/{id}/update', 'StudentController@update');
 
 	// class
 	Route::get('/classes', 'ClassesController@index');
@@ -123,16 +133,8 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::post('/user/update/{id}', 'UserController@update');
 	Route::get('/logout', 'UserController@logout');
 
-	//admissions
-	/*Route::get('/admissions', function(){
-		return view('pages.admission.index');
-	});*/
-
 	Route::get('/admission', 'AdmissionController@index');
 	Route::get('/s/admission', 'AdmissionController@api_index');
-
-	
-	// Route::get('/admissions/index', 'AdmissionController@index');
 
 	Route::get('/admission/new', 'AdmissionController@showadmissionview');
 	Route::get('/s/admission/new', 'AdmissionController@api_showadmissionview');

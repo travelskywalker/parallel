@@ -31,15 +31,18 @@ class UploadController extends Controller
 
     	$newfile = $baseUrl.$filename;
 
-    	// php
         if($imgUrl == 'files/images/default/nophoto.jpeg'){
-            copy($imgUrl, $newfile);
+            if(copy($imgUrl, $newfile)){
+                return $newfile;
+            }
         }
         else{
-            rename($imgUrl, $newfile);
+            if(rename($imgUrl, $newfile)){
+                return $newfile;
+            }
         }
     	
-    	return $newfile;
+    	
     }
 
     public function deleteTemp($url){

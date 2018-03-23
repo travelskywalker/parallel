@@ -6,7 +6,7 @@
 <form id="edit_school_form" sendform-url="/school/{{$school->id}}/update">
 
 	<div class="add-image-container" id="logo_container" activates="image_upload" style="background:url('/{{$school->logo}}')">please upload square photo to ensure image compatibility</div>
-	<input type="hidden" name="logo" id="logo">
+	<input type="hidden" name="logo" id="logo" value="{{$school->logo}}">
 	<div class="row">
 			<div class="col s12">
 	  		<div class="input-field col s12">

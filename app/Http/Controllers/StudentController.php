@@ -109,9 +109,11 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Student $student)
+    public function edit($id)
     {
-        //
+        $student = Student::find($id);
+
+        return view('pages.student.edit')->with(['student'=>$student]);
     }
 
     /**

@@ -47,14 +47,18 @@ function loadIndex(){
 }
 
 function openEditModal(url, type){
-	$('#edit_modal').modal('open');
+	$('#edit_modal').modal({
+		complete: function() { 
+			$('#edit_modal .modal-content-container').html('');
+		} 
+	}).modal('open');
 
 	$('#edit_modal .modal-content-container').html(loader());
 
 	$('#edit_modal .save-btn').attr('onClick', 'saveEdit(\''+type+'\')');
 
 	sendAPI('GET', url).then(function(response){
-		$('.modal-content-container').html(response);
+		$('#edit_modal .modal-content-container').html(response);
 		formInit();
 		init();
 	})
@@ -177,7 +181,6 @@ function image_upload_init(){
 		var data = new FormData($('#'+form)[0]);
 
 		uploadTempImg(url, data).then(function(response){
-
 			// append to container
 			$('#'+container).css({'background':'url("/'+response+'")'});
 			// add url to logo input
@@ -398,7 +401,6 @@ function checkFormError(form){
 	    }
 	);
 
-
 	if(error.length == 0){
 		return false;
 	}else{
@@ -421,6 +423,7 @@ function sendForm(form, url, successpage){
 			}
 
 			showToast(response.message);
+			
 			if(successpage){
 
 				setTimeout(function(){
