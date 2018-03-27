@@ -73,7 +73,7 @@ class StudentController extends Controller
         // $student = Student::find($id);
 
         $student = DB::table('students')
-                            ->select('students.*','students.image', 'schools.name as school_name', 'classes.name as class_name', 'sections.*', 'sections.name as section_name')
+                            ->select('students.*','students.notes', 'students.description','students.image', 'schools.name as school_name', 'schools.id as school_id', 'classes.name as class_name', 'sections.timefrom', 'sections.timeto', 'sections.room', 'sections.name as section_name')
                             ->leftJoin('admissions', 'admissions.student_id','=','students.id')
                             ->leftJoin('schools', 'admissions.school_id', '=', 'schools.id')
                             ->leftJoin('classes', 'admissions.classes_id', '=', 'classes.id')
@@ -123,9 +123,38 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, $id)
     {
-        //
+        $validdatedData = $request->validate([
+            // student details required
+            'studentnumber' => 'required',
+            'firstname' => 'required',
+            'middlename' => 'required',
+            'lastname' => 'required',
+            'birthdate' => 'required',
+            'fathersname' => 'required',
+            'mothersname' => 'required',
+            'guardianname' => 'required',
+            'guardianrelationship' => 'required',
+            'emergencycontactnumber' => 'required',
+            'address' => 'required',
+            'gender' => 'required',
+        ]);
+
+        $student = Student::find($id);
+
+        if($request->image != $student->image){
+            $image = app(\App\Http\Controllers\UploadController::class)->imageUpload('files/'.$request->school_id.'/images/student/'.$student->id.'/',$request->image);
+
+            $request->replace(array('image' => $image));
+        }
+
+        $newbirthdate = \Carbon\Carbon::parse($request->birthdate);
+        $request->merge(array('birthdate' => $newbirthdate));
+
+        $student->update($request->all());
+
+        return response()->json(['data'=>$student, 'message'=>'Student has been updated']);
     }
 
     /**

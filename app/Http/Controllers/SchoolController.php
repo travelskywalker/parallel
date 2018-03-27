@@ -21,10 +21,10 @@ class SchoolController extends Controller
      */
     public function index($fullpage = true)
     {
-        // return SchoolResource::collection(School::all());
         if(Auth::user()->access_id != 0){
             $school_id = Auth::user()->school_id;
-            return $this->show($school_id)->with(['fullpage'=>$fullpage, 'page'=>'index']);
+            return redirect('/school/'.$school_id);
+
         }else{
             $schools = School::orderby('name', 'asc')->get();
             return view('pages.school.school')->with(['schools'=>$schools, 'fullpage'=>$fullpage, 'page'=>'index']);
@@ -90,6 +90,7 @@ class SchoolController extends Controller
      */
     public function show($id, $fullpage = true)
     {
+
         $schooldetails = School::find($id);
 
         $classes = School::find($id)->classes;
@@ -106,17 +107,23 @@ class SchoolController extends Controller
                         ->where('schools.id', $id)
                         ->get();
 
-        return view('pages.school.details')->with(
-            [
-                'school' => $schooldetails,
-                'classes'=> $classes,
-                'teachers' => $teachers,
-                'sections' => $sections,
-                'students' => $students,
-                'fullpage' => $fullpage,
-                'page' => 'details',
-            ]
-        );
+
+        if(Auth::user()->access_id != 0 && Auth::user()->school_id != $id){
+            return redirect('/school');
+        }
+        else{
+            return view('pages.school.details')->with(
+                [
+                    'school' => $schooldetails,
+                    'classes'=> $classes,
+                    'teachers' => $teachers,
+                    'sections' => $sections,
+                    'students' => $students,
+                    'fullpage' => $fullpage,
+                    'page' => 'details',
+                ]
+            );
+        }
 
         // return view('pages.school.details')->with(['school'=>$data, 'fullpage'=>$fullpage]);
     }
