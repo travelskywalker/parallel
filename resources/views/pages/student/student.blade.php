@@ -16,6 +16,7 @@
 						<div class="col s8">
 					  		<div class="input-field col s8">
 					          <input id="student_school" type="text" class="validate" value="{{$student[0]->school_name}}" disabled>
+					          <input type="hidden" id="student_school_id" value="{{$student[0]->school_id}}">
 					          <label for="student_school">School</label>
 							</div>
 							<div class="input-field col s4">

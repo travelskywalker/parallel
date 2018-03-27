@@ -129,6 +129,10 @@ class UserController extends Controller
         return $user;
     }
 
+    public function createStudentUser($student){
+        
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -154,8 +158,9 @@ class UserController extends Controller
     public function getstudentbystudentnumber($studentnumber, $school_id){
 
         $student = DB::table('students')
-            ->select('students.id', 'students.studentnumber', 'admissions.student_id', 'admissions.school_id')
+            ->select('students.id', 'students.studentnumber', 'admissions.student_id', 'admissions.school_id', 'schools.id as school_id')
             ->leftJoin('admissions', 'admissions.student_id', '=', 'students.id')
+            ->leftJoin('schools', 'admissions.school_id', '=', 'schools.id')
             ->where('admissions.school_id', '=', $school_id)
             ->where('students.studentnumber', '=', $studentnumber)
             // ->orderBy('users.name', 'asc')

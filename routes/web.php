@@ -67,7 +67,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('/s/student/{id}', 'StudentController@api_show');
 
 	Route::get('/student/{id}/edit', 'StudentController@edit');
-	Route::get('/student/{id}/update', 'StudentController@update');
+	Route::post('/student/{id}/update', 'StudentController@update');
 
 	// class
 	Route::get('/classes', 'ClassesController@index');

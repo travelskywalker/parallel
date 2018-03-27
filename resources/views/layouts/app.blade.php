@@ -29,10 +29,7 @@
   @include('components.footer')
 @else
     <div id="app" class="@if(!Auth::check()) login @endif">
-        <!-- <main class="py-4">
-            @yield('content')
-        </main> -->
-
+        
         @if(Auth::check())
         <!-- navbar -->
         <div class="navbar-fixed" id="nav_main">

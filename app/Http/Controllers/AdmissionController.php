@@ -77,7 +77,7 @@ class AdmissionController extends Controller
                 'student_id' => 'required',
                 'admission_date' =>'required',
 
-
+                // student details required
                 'first_name' => 'required',
                 'middle_name' => 'required',
                 'last_name' => 'required',
@@ -85,6 +85,7 @@ class AdmissionController extends Controller
                 'fathers_name' => 'required',
                 'mothers_name' => 'required',
                 'guardian_name' => 'required',
+                'guardianrelationship' => 'required',
                 'emergencycontactnumber' => 'required',
                 'address' => 'required',
                 'gender' => 'required',
@@ -144,14 +145,6 @@ class AdmissionController extends Controller
             $image = app(\App\Http\Controllers\UploadController::class)->imageUpload('files/'.$request->school_id.'/images/student/'.$student->id.'/',$request->image);
 
             $student->update(['image'=> $image]);
-            // $student->save(['nationality', 'tatatatatatata']);
-            // $student->save(['image'=> 'testingimage to']);
-
-            // $s = Student::find($student->id);
-            // $s->image = $image;
-            // $s->save();
-
-            // var_dump($image);
         };
 
         return response()->json(['message'=>'Student has been enrolled','data'=>$request]);
