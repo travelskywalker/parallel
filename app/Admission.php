@@ -12,7 +12,7 @@ class Admission extends Model
      * @var array
      */
     protected $fillable = [
-        'admissionnumber', 'type', 'date', 'student_id', 'school_id', 'classes_id', 'section_id', 'status', 'notes', 'description'
+        'admissionnumber', 'type', 'date','academicyear_id', 'student_id', 'school_id', 'classes_id', 'section_id', 'status', 'notes', 'description'
     ];
 
     public function student(){

@@ -11,6 +11,7 @@ use App\Classes;
 use App\Section;
 use App\Admission;
 use App\Student;
+use App\AcademicYear;
 
 class AdmissionController extends Controller
 {
@@ -52,7 +53,11 @@ class AdmissionController extends Controller
                 return $query->where('school_id', $user_school_id);
             })->get();
 
-        return view('pages.admission.add')->with(['schools'=>$schools, 'classes'=>$classes, 'fullpage' => $fullpage, 'page'=>'add']);
+        $activeAY = AcademicYear::when(Auth::user()->access_id != 0, function ($query) use ($user_school_id) {
+                return $query->where('school_id', $user_school_id)->where('status', 'active');
+            })->get();
+
+        return view('pages.admission.add')->with(['schools'=>$schools, 'classes'=>$classes, 'fullpage' => $fullpage, 'page'=>'add', 'activeAY'=>$activeAY]);
     }
 
     public function api_showadmissionview(){
@@ -133,6 +138,7 @@ class AdmissionController extends Controller
             'student_id' => $student->id,
             'admissionnumber' => $request->admission_id,
             'date' => $request->admission_date,
+            'academicyear_id' =>$request->academicyear_id,
             'school_id' => $request->school_id,
             'classes_id' => $request->classes_id,
             'section_id' => $request->section_id,

@@ -8,6 +8,7 @@ use App\Student;
 use App\Teacher;
 use App\Classes;
 use App\Section;
+use App\AcademicYear;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +59,8 @@ class SystemController extends Controller
                     ->where('users.id', Auth::user()->id)
                     ->get();
 
-        return view('pages.account.details')->with(['account'=>$account]);
+        $activeAY = AcademicYear::where('school_id', Auth::user()->school_id)->where('status', 'active')->get();
+
+        return view('pages.account.details')->with(['account'=>$account, 'activeAY'=>$activeAY]);
     }
 }

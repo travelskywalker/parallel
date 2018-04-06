@@ -102,6 +102,7 @@
 					<thead>
 					  <tr>
 					      <th>Date</th>
+					      <th>Academic Year</th>
 					      <th>Class</th>
 					      <th>Section</th>
 					      <th>Status</th>
@@ -112,6 +113,7 @@
 						@foreach ($admissions as $admission)
 						<tr class="data-row row-" data-id="" onclick="">
 							<td>{{Carbon\Carbon::parse($admission->date)->format('M d, Y')}}</td>
+							<td></td>
 							<td>{{$admission->class_name}}</td>
 							<td>{{$admission->section_name}}</td>
 							<td>{{$admission->status}}</td>
