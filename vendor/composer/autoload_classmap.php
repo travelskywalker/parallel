@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AccessesTableseeder' => $baseDir . '/database/seeds/AccessesTableseeder.php',
+    'App\\AcademicYear' => $baseDir . '/app/AcademicYear.php',
     'App\\Access' => $baseDir . '/app/Access.php',
     'App\\Admission' => $baseDir . '/app/Admission.php',
     'App\\Classes' => $baseDir . '/app/Classes.php',
@@ -14,6 +15,7 @@ return array(
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AccessController' => $baseDir . '/app/Http/Controllers/AccessController.php',
     'App\\Http\\Controllers\\AdminController' => $baseDir . '/app/Http/Controllers/AdminController.php',
+    'App\\Http\\Controllers\\AdmissionController' => $baseDir . '/app/Http/Controllers/AdmissionController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
     'App\\Http\\Controllers\\Auth\\RegisterController' => $baseDir . '/app/Http/Controllers/Auth/RegisterController.php',
@@ -24,7 +26,9 @@ return array(
     'App\\Http\\Controllers\\SchoolController' => $baseDir . '/app/Http/Controllers/SchoolController.php',
     'App\\Http\\Controllers\\SectionController' => $baseDir . '/app/Http/Controllers/SectionController.php',
     'App\\Http\\Controllers\\StudentController' => $baseDir . '/app/Http/Controllers/StudentController.php',
+    'App\\Http\\Controllers\\SystemController' => $baseDir . '/app/Http/Controllers/SystemController.php',
     'App\\Http\\Controllers\\TeacherController' => $baseDir . '/app/Http/Controllers/TeacherController.php',
+    'App\\Http\\Controllers\\UploadController' => $baseDir . '/app/Http/Controllers/UploadController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
