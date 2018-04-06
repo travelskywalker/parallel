@@ -152,6 +152,22 @@ function saveEdit(type){
 	});
 }
 
+function saveAdd(type){
+	var form = $('#add_modal').find('form').attr('id');
+	var url = $('#'+form).attr('sendform-url');
+
+	sendForm(form, url, type).then(function(response){
+
+		console.log(response);
+
+	})
+	.catch(function(error){
+
+		errorMsg(lang.somethingwentwrong);
+
+	});
+}
+
 function updatePageTitle(url){
 	$('#page_title').html(getPageTitle(url));
 }
