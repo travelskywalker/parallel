@@ -26,10 +26,9 @@
   </tbody>
   <tr>
       <td>Academic Year</td>
-      <td>year</td>
+      <td>@if(count($activeAY) == 0) no active Academic Year @else {{Carbon\Carbon::parse($activeAY[0]->from)->format('Y')}} - {{Carbon\Carbon::parse($activeAY[0]->to)->format('Y')}} @endif</td>
     </tr>
 </table>
 @endif
-
 
 </div>
