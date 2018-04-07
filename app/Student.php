@@ -12,7 +12,7 @@ class Student extends Model
      * @var array
      */
     protected $fillable = [
-        'studentnumber', 'firstname', 'middlename', 'lastname', 'gender', 'birthdate', 'birthplace', 'bloodtype', 'address', 'fathersname', 'mothersname', 'guardianname', 'emergencycontactnumber','guardianrelationship', 'nationality', 'religion', 'image', 'notes', 'description', 'status'
+        'studentnumber', 'lrn', 'lis', 'firstname', 'middlename', 'lastname', 'gender', 'birthdate', 'birthplace', 'bloodtype', 'address', 'fathersname', 'mothersname', 'guardianname', 'emergencycontactnumber','guardianrelationship', 'nationality', 'religion', 'image', 'notes', 'description', 'status'
     ];
 
 

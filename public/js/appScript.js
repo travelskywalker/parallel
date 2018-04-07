@@ -183,6 +183,12 @@ function editDetails(page, id){
 
 }
 
+function filterInit(){
+	$('#ay_filter').change(function(){
+		ay_filter($(this).val());
+	});
+}
+
 function formInit(){
 	Materialize.updateTextFields();
 	$('select').material_select();
@@ -319,6 +325,25 @@ function updateDetails(page, form){
 function backbtnclick (){
 
 	window.history.back();
+
+}
+
+function ay_filter(id){
+
+	var page = window.location.pathname
+	var url = '/academicyear/'+id+page;
+	var container = $('#page_data');
+
+	// append loader
+	container.html(loader());
+
+	sendAPI('GET', url).then(function(response){
+		container.html(response);
+	})
+	.catch(function(error){
+		console.log(error.responseText);
+		errorMsg(language.somethingwentwrong);
+	});
 
 }
 

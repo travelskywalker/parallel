@@ -7,6 +7,8 @@ function init(){
 	$(".button-collapse").sideNav();
 
 	image_upload_init();
+	newStudentInit();
+	filterInit();
 
 	$('#admission_number').focusout(function(){
 		var _self=this;
@@ -28,29 +30,8 @@ function init(){
 		});
 	});
 
-
-	$('#admission_student_id').focusout(function(){
-		var _self=this;
-
-		if($(this).val() == '') return 
-
-		var url = '/api/student/'+$(this).val()+'/'+$('select#admission_school_id').val();
-
-		sendAPI('GET', url).then(function(response){
-
-			console.log(response);
-			if(response.data.length > 0 ){
-				// no admission in database
-				$(_self).removeClass('valid').addClass('invalid');
-				showToast(language.studentnumexist);
-			}else{
-
-			}
-		});
-	});
-
 	$('select#admission_type').change(function(){
-
+		console.log('change')
 		if($(this).val() == 'old'){
 			$('.search-student').show();
 			$('#search_student').focus();
@@ -169,6 +150,69 @@ function init(){
 	});
 }
 
+function newStudentInit(){
+	$('#admission_student_id').focusout(function(){
+		var _self=this;
+
+		if($(this).val() == '') return 
+
+		var url = '/api/student/'+$(this).val()+'/'+$('select#admission_school_id').val();
+
+		sendAPI('GET', url).then(function(response){
+
+			console.log(response);
+			if(response.data.length > 0 ){
+				// no admission in database
+				$(_self).removeClass('valid').addClass('invalid');
+				showToast(language.studentnumexist);
+			}else{
+
+			}
+		});
+	});
+
+
+	$('#admission_lrn').focusout(function(){
+		var _self=this;
+
+		if($(this).val() == '') return 
+
+		var url = '/api/api/student/lrn/'+$(this).val();
+
+		sendAPI('GET', url).then(function(response){
+
+			console.log(response);
+			if(response.data.length > 0 ){
+				// no admission in database
+				$(_self).removeClass('valid').addClass('invalid');
+				showToast(language.studentnumexist);
+			}else{
+
+			}
+		});
+	});
+
+	$('#admission_lis').focusout(function(){
+		var _self=this;
+
+		if($(this).val() == '') return 
+
+		var url = '/api/api/student/lis/'+$(this).val();
+
+		sendAPI('GET', url).then(function(response){
+
+			console.log(response);
+			if(response.data.length > 0 ){
+				// no admission in database
+				$(_self).removeClass('valid').addClass('invalid');
+				showToast(language.studentnumexist);
+			}else{
+
+			}
+		});
+	});
+}
+
 function populateAdmissionData(id){
 	showAdmissionForm('old', id);
 }
@@ -179,10 +223,12 @@ function showAdmissionForm(type = 'new', id=0){
 
 	sendAPI('GET', url).then(function(response){
 		$('.admission-form').html(response);
+		
 		clearSearchStudent();
-
 		formInit();
 		enableAdmissionBtn();
+		newStudentInit();
+		image_upload_init();
 	});
 	
 }
@@ -215,8 +261,6 @@ function disableAdmissionBtn(){
 function enableAdmissionBtn(){
 	$('.admission-btn').removeClass('disabled');
 }
-
-
 
 // for tuts
 // $('.tap-target').tapTarget('open');

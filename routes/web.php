@@ -151,6 +151,8 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('/academicyear/edit/{id}', 'AcademicYearController@edit');
 	Route::post('/academicyear/update/{id}', 'AcademicYearController@update');
 
+	Route::get('/academicyear/{academicyear_id}/admission', 'AcademicYearController@admissions');
+
 	// system
 	Route::get('/system/search/{key}', 'SystemController@showresult');
 	Route::get('/system/contacts', 'SystemController@getContacts');

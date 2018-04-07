@@ -593,7 +593,3 @@ function isPasswordChanged(){
 	else return false;
 }
 
-function checkLrn(number){
-	
-}
-

@@ -22,18 +22,43 @@ class AdmissionController extends Controller
      */
     public function index($fullpage = true)
     {
+        $academicyearcontroller = app(\App\Http\Controllers\AcademicYearController::class);
+
+        $user_school_id = Auth::user()->school_id;
+
+        if($academicyearcontroller->hasActiveAY($user_school_id)){
+            // get active academic year
+            $academicyear_id = $academicyearcontroller->getActiveAcademicYear($user_school_id);
+            // var_dump($academicyearcontroller->getActiveAcademicYear($user_school_id));
+        }else{
+            // get latest academic year instead
+            $academicyear_id = $academicyearcontroller->getLatestAcademicYear($user_school_id);
+        }
+
+        $admissions = $this->admissions($academicyear_id);
+
+        $academicyears = AcademicYear::where('school_id', Auth::user()->school_id)->get();
+
+        return view('pages.admission.admissions')->with(['admissions'=>$admissions, 'academicyears'=>$academicyears, 'academicyear_id'=>$academicyear_id, 'fullpage' => $fullpage, 'page'=>'index']);
+    }
+
+    public function admissions($academicyear_id){
+
         $user_school_id = Auth::user()->school_id;
 
         $admissions = DB::table('admissions')
-            ->select('admissions.id','admissions.date', 'students.studentnumber', 'students.firstname', 'students.lastname', 'admissions.student_id', 'admissions.school_id', 'admissions.status', 'schools.name as school_name')
-            ->leftJoin('students', 'students.id', '=', 'admissions.student_id')
-            ->leftJoin('schools', 'schools.id', '=', 'admissions.school_id')
-            ->when(Auth::user()->access_id != 0, function ($query) use ($user_school_id) {
-                return $query->where('schools.id', $user_school_id);
-            })
-            ->get();
+        ->select('admissions.id','admissions.date', 'students.studentnumber', 'students.firstname', 'students.lastname', 'admissions.student_id', 'admissions.school_id', 'admissions.status', 'schools.name as school_name', 'academic_years.id as academicyear_id', 'academic_years.from', 'academic_years.to')
+        ->leftJoin('students', 'students.id', '=', 'admissions.student_id')
+        ->leftJoin('schools', 'schools.id', '=', 'admissions.school_id')
+        ->leftJoin('academic_years', 'academic_years.id', '=', 'admissions.academicyear_id')
+        ->when(Auth::user()->access_id != 0, function ($query) use ($user_school_id) {
+            return $query->where('schools.id', $user_school_id);
+        })
+        ->where('academic_years.id', $academicyear_id)
+        ->orderBy('admissions.date', 'desc')
+        ->get();
 
-        return view('pages.admission.admissions')->with(['admissions'=>$admissions, 'fullpage' => $fullpage, 'page'=>'index']);
+        return $admissions;
     }
 
     public function api_index(){
@@ -101,6 +126,8 @@ class AdmissionController extends Controller
             // create student
             $student = Student::create([
                 'studentnumber' => $request->student_id,
+                'lrn' => $request->lrn,
+                'lis' => $request->lis,
                 'firstname' => $request->first_name,
                 'middlename' => $request->middle_name,
                 'lastname' => $request->last_name,

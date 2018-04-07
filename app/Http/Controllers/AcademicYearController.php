@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 use App\AcademicYear;
 
 class AcademicYearController extends Controller
@@ -79,16 +82,56 @@ class AcademicYearController extends Controller
     	return response(['data'=>$academicyear, 'message'=>'Academic Year has been updated']);
     }
 
-    public function hasActiveAY(){
-    	$academicyear = AcademicYear::where('school_id', Auth::user()->school_id)->where('status', 'active');
+    public function hasActiveAY($school_id){
+    	$academicyear = AcademicYear::where('school_id', $school_id)->where('status', 'active')->get();
 
-    	return response()->json($academicyear);
+    	if(count($academicyear) > 0){
+            return (bool)true;
+        }else{
+            return (bool)false;
+        }
     }
 
-    public function getAcademicYear($school_id){
+    public function getActiveAcademicYear($school_id){
         // get active academic year
-        $activeyear = AcademicYear::where('school_id', $school_id)->where('status', '=', 'active');
-
-
+        $activeyear = AcademicYear::where('school_id', $school_id)->where('status', '=', 'active')->get();
+        // var_dump($activeyear);
+        return $activeyear[0]->id;
     }
+
+    public function getLatestAcademicYear($school_id){
+
+        $now = new Carbon();
+
+        $academicyearid;
+
+        $academicyears = $this->getAcademicYears(1);
+
+        foreach ($academicyears as $key => $value) {
+            $from = Carbon::parse($value->from);
+            $to = Carbon::parse($value->to);
+
+            if($now->between($from, $to)){
+                $academicyearid = $value->id;
+            }
+        }
+
+        return $academicyearid;
+    }
+
+    public function getAcademicYears($school_id){
+        $academicyears = AcademicYear::where('school_id', $school_id)->get();
+        // $academicYears = "tae";
+        return $academicyears;
+    }
+
+
+    public function admissions($academicyear_id){
+
+        $admissions = app(\App\Http\Controllers\AdmissionController::class)->admissions($academicyear_id);
+
+        return view('pages.admission.admissions-data')->with(['admissions'=>$admissions]);
+    }
+
+    
 }

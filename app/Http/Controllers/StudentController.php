@@ -167,4 +167,18 @@ class StudentController extends Controller
     {
         //
     }
+
+
+    // api functions
+    public function getstudentbylrn($number){
+        $student = Student::where('lrn','=', $number)->get();
+
+        return response()->json(['data'=>$student]);
+    }
+
+    public function getstudentbylis($number){
+        $student = Student::where('lis','=', $number)->get();
+
+        return response()->json(['data'=>$student]);
+    }
 }
