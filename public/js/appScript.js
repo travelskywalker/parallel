@@ -235,10 +235,6 @@ function initialize(){
 	$(".button-collapse").sideNav({
 		edge: 'right'
 	});
-
-	
-
-	
 }
 
 function showDetails(page,id){
@@ -271,7 +267,6 @@ $(document).ready(function(){
 	});
 
 	$('.sub-nav .tab').click(function(){ navClick($(this)); });
-
 
 	window.addEventListener("popstate", function(e) {
 		// state

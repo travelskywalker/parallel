@@ -48,7 +48,9 @@ function init(){
 	$('#search_student').keyup(function(){
 		var key = $(this).val();
 		var school_id = $('#admission_school_id').val();
-		var url = '/school/'+school_id+'/student/search/'+key;
+		var classes_id = $('#admission_class_id').val();
+		var url = '/school/'+school_id+'/student/class/'+classes_id+'/search/'+key;
+
 
 		if(key.length >=2){
 			sendAPI('GET', url).then(function(response){
@@ -77,11 +79,12 @@ function init(){
 
 	$('select#admission_class_id').change(function(){
 		// get api
-		var url ='/api/class/'+$(this).val()+'/sections';
+		var url ='/class/'+$(this).val()+'/sections';
 		sendAPI('GET', url).then(function(response){
 
 			// remove section content
 			clearSectionData();
+			showAdmissionType();
 
 			// populate
 			$.each(response.data, function(key,val){
@@ -148,6 +151,10 @@ function init(){
 			$('#school_id_wrapper').hide();
 		}
 	});
+}
+
+function showAdmissionType(){
+	$('.admission-type').show();
 }
 
 function newStudentInit(){

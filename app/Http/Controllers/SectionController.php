@@ -7,6 +7,7 @@ use App\Classes;
 use App\Teacher;
 use App\Student;
 use App\School;
+use App\AcademicYear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -23,9 +24,24 @@ class SectionController extends Controller
      */
     public function index($fullpage = true)
     {
+        $academicyearcontroller = app(\App\Http\Controllers\AcademicYearController::class);
+
         $user_school_id = Auth::user()->school_id;
 
+        $academicyear_id = $academicyearcontroller->getAcademicYear($user_school_id);
+
         $section = Section::all();
+
+        $sections = $this->sections($academicyear_id);
+
+        $academicyears = AcademicYear::where('school_id', Auth::user()->school_id)->get();
+
+        return view('pages.section.sections')->with(['sections'=>$sections, 'academicyears'=>$academicyears, 'academicyear_id'=>$academicyear_id, 'fullpage'=>$fullpage, 'page'=>'index']);
+    }
+
+    public function sections($academicyear_id){
+
+        $user_school_id = Auth::user()->school_id;
 
         $sections = DB::table('sections as s')
             ->selectRaw('s.id,s.name,teachers.firstname as teacher_firstname, teachers.lastname as teacher_lastname, s.timefrom, s.timeto,s.room, s.studentlimit, classes.name as class_name, s.notes, s.description, s.status, schools.name as school_name, COUNT(DISTINCT(admissions.id)) as student_count')
@@ -33,14 +49,15 @@ class SectionController extends Controller
             ->leftJoin('schools', 'classes.school_id', '=', 'schools.id')
             ->leftJoin('teachers', 's.teacher_id', '=', 'teachers.id')
             ->leftJoin('admissions', 'admissions.section_id', '=', 's.id')
-            ->orderby('s.name','asc')
-            ->when(Auth::user()->access_id != 0, function ($query) use ($user_school_id) {
-                return $query->where('classes.school_id', $user_school_id);
+            ->leftJoin('academic_years', 'academic_years.id', '=', 'admissions.academicyear_id')
+            ->when(Auth::user()->access_id != 0, function ($query) use ($user_school_id, $academicyear_id) {
+                return $query->where('s.school_id', $user_school_id)->where('s.academicyear_id', $academicyear_id);
             })
+            ->orderby('s.name','asc')
             ->groupBy('s.id')
             ->get();
 
-        return view('pages.section.sections')->with(['sections'=>$sections, 'fullpage'=>$fullpage, 'page'=>'index']);
+        return $sections;
     }
 
     public function api_index(){
@@ -93,6 +110,12 @@ class SectionController extends Controller
             })
         ->get();
 
+        $academicyears = AcademicYear::where('school_id', Auth::user()->school_id)->get();
+
+        $activeAY = AcademicYear::when(Auth::user()->access_id != 0, function ($query) use ($user_school_id) {
+                return $query->where('school_id', $user_school_id)->where('status', 'active');
+            })->get();
+
         if(School::find($user_school_id)){
             $teachers = School::find($user_school_id)->teachers;
             $classes = School::find($user_school_id)->classes;
@@ -101,9 +124,7 @@ class SectionController extends Controller
             $classes = [];
         }
 
-
-
-        return view('pages.section.add')->with(['schools'=>$schools, 'classes'=>$classes, 'teachers'=>$teachers, 'fullpage'=>$fullpage, 'page'=>'add']);
+        return view('pages.section.add')->with(['schools'=>$schools, 'classes'=>$classes, 'teachers'=>$teachers, 'academicyears'=>$academicyears, 'activeAY'=>$activeAY, 'fullpage'=>$fullpage, 'page'=>'add']);
     }
     public function api_shownewsection(){
         return $this->shownewsection(false);

@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::get('/school/classes/{id}', 'SchoolController@showclasses');
 
-	Route::get('/school/{id}/student/search/{key}', 'SchoolController@student_search');
+	Route::get('/school/{id}/student/class/{classes_id}/search/{key}', 'SchoolController@student_search');
 
 	// teacher
 	Route::get('/teacher', 'TeacherController@index');
@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('/student/{id}/edit', 'StudentController@edit');
 	Route::post('/student/{id}/update', 'StudentController@update');
 
+	Route::get('/student/{id}/admissions', 'StudentController@getadmissions');
+
 	// class
 	Route::get('/classes', 'ClassesController@index');
 	Route::get('/s/classes', 'ClassesController@api_index');
@@ -81,6 +83,8 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::get('/classes/{id}', 'ClassesController@show');
 	Route::get('/s/classes/{id}', 'ClassesController@api_show');
+
+	Route::get('/class/{class_id}/sections', 'ClassesController@getsections');
 	
 
 	// section
@@ -152,12 +156,11 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::post('/academicyear/update/{id}', 'AcademicYearController@update');
 
 	Route::get('/academicyear/{academicyear_id}/admission', 'AcademicYearController@admissions');
+	Route::get('/academicyear/{academicyear_id}/section', 'AcademicYearController@sections');
 
 	// system
 	Route::get('/system/search/{key}', 'SystemController@showresult');
 	Route::get('/system/contacts', 'SystemController@getContacts');
 	Route::get('/system/account/details', 'SystemController@accountDetails');
-
-
 	
 });

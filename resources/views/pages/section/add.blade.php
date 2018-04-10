@@ -16,7 +16,7 @@
 		        <div class="card-content">
 		        	<div class="row">
 			        	<div class="col s12">
-		        			<div class="input-field col s12">
+		        			<div class="input-field col s8">
 							    <select id="school_id" name="school_id">
 							      		@if(Auth::user()->access_id == 0)<option value="" disabled selected>select school</option>@endif
 							      		@foreach($schools as $school)
@@ -24,6 +24,15 @@
 							      		@endforeach
 							    </select>
 							    <label>School</label>
+							</div>
+							<div class="input-field col s4">
+							    <select id="academicyear_id" name="academicyear_id">
+							      		@if(Auth::user()->access_id == 0)<option value="" disabled selected>select academic year</option>@endif
+							      		
+							      			<option value="{{$activeAY[0]->id}}" selected="">{{Carbon\Carbon::parse($activeAY[0]->from)->format('Y')}} - {{Carbon\Carbon::parse($activeAY[0]->to)->format('Y')}}</option>
+							      		
+							    </select>
+							    <label>Academic Year</label>
 							</div>
 						</div>
 					</div>

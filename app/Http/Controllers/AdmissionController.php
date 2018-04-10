@@ -26,14 +26,7 @@ class AdmissionController extends Controller
 
         $user_school_id = Auth::user()->school_id;
 
-        if($academicyearcontroller->hasActiveAY($user_school_id)){
-            // get active academic year
-            $academicyear_id = $academicyearcontroller->getActiveAcademicYear($user_school_id);
-            // var_dump($academicyearcontroller->getActiveAcademicYear($user_school_id));
-        }else{
-            // get latest academic year instead
-            $academicyear_id = $academicyearcontroller->getLatestAcademicYear($user_school_id);
-        }
+        $academicyear_id = $academicyearcontroller->getAcademicYear($user_school_id);
 
         $admissions = $this->admissions($academicyear_id);
 
@@ -51,10 +44,10 @@ class AdmissionController extends Controller
         ->leftJoin('students', 'students.id', '=', 'admissions.student_id')
         ->leftJoin('schools', 'schools.id', '=', 'admissions.school_id')
         ->leftJoin('academic_years', 'academic_years.id', '=', 'admissions.academicyear_id')
-        ->when(Auth::user()->access_id != 0, function ($query) use ($user_school_id) {
-            return $query->where('schools.id', $user_school_id);
+        ->when(Auth::user()->access_id != 0, function ($query) use ($user_school_id, $academicyear_id) {
+            return $query->where('schools.id', $user_school_id)->where('academic_years.id', $academicyear_id);
         })
-        ->where('academic_years.id', $academicyear_id)
+        
         ->orderBy('admissions.date', 'desc')
         ->get();
 

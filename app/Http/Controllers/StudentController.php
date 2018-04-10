@@ -181,4 +181,10 @@ class StudentController extends Controller
 
         return response()->json(['data'=>$student]);
     }
+
+    public function getadmissions($student_id){
+        $admissions = Student::find($student_id)->admissions;
+
+        return response()->json(['data'=>$admissions]);
+    }
 }

@@ -32,7 +32,7 @@ Route::get('/api/student/lis/{number}', 'StudentController@getstudentbylis');
 
 // class
 Route::post('/class/new', 'ClassesController@create');
-Route::get('/class/{class_id}/sections', 'ClassesController@getsections');
+
 
 // section
 Route::post('/section/new', 'SectionController@create');
@@ -55,6 +55,6 @@ Route::post('/admission/new', 'AdmissionController@create');
 Route::post('/temp/imageupload', 'UploadController@tempImage');
 
 
-
+Route::get('/system/academicyears/{school_id}', 'AcademicYearController@getAcademicYears');
 Route::get('/system/academicyear/latest/{school_id}', 'AcademicYearController@getLatestAcademicYear');
 Route::get('/system/academicyear/active/{school_id}', 'AcademicYearController@getActiveAcademicYear');

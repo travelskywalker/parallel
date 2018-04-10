@@ -133,5 +133,28 @@ class AcademicYearController extends Controller
         return view('pages.admission.admissions-data')->with(['admissions'=>$admissions]);
     }
 
+    public function sections($academicyear_id){
+        $sections = app(\App\Http\Controllers\SectionController::class)->sections($academicyear_id);
+
+        return view('pages.section.sections-data')->with(['sections'=>$sections]);
+    }
+
+    public function getAcademicYear($school_id){
+
+        $academicyear_id;
+
+        if($this->hasActiveAY($school_id)){
+            // get active academic year
+            $academicyear_id = $this->getActiveAcademicYear($school_id);
+            // var_dump($academicyearcontroller->getActiveAcademicYear($user_school_id));
+        }else{
+            // get latest academic year instead
+            $academicyear_id = $this->getLatestAcademicYear($school_id);
+        }
+
+        return $academicyear_id;
+
+    }
+
     
 }

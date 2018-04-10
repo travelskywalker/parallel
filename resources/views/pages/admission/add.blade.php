@@ -105,7 +105,7 @@
 							</div>
 
 							<div class="row">
-								<div class="input-field col s4">
+								<div class="input-field col s4 admission-type">
 								    <select id="admission_type" name="type">
 								    	<option value="old">old student</option>
 								    	<option value="new" selected="">new student</option>
