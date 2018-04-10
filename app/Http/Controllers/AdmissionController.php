@@ -11,6 +11,7 @@ use App\Classes;
 use App\Section;
 use App\Admission;
 use App\Student;
+use App\AcademicYear;
 
 class AdmissionController extends Controller
 {
@@ -21,18 +22,36 @@ class AdmissionController extends Controller
      */
     public function index($fullpage = true)
     {
+        $academicyearcontroller = app(\App\Http\Controllers\AcademicYearController::class);
+
+        $user_school_id = Auth::user()->school_id;
+
+        $academicyear_id = $academicyearcontroller->getAcademicYear($user_school_id);
+
+        $admissions = $this->admissions($academicyear_id);
+
+        $academicyears = AcademicYear::where('school_id', Auth::user()->school_id)->get();
+
+        return view('pages.admission.admissions')->with(['admissions'=>$admissions, 'academicyears'=>$academicyears, 'academicyear_id'=>$academicyear_id, 'fullpage' => $fullpage, 'page'=>'index']);
+    }
+
+    public function admissions($academicyear_id){
+
         $user_school_id = Auth::user()->school_id;
 
         $admissions = DB::table('admissions')
-            ->select('admissions.id','admissions.date', 'students.studentnumber', 'students.firstname', 'students.lastname', 'admissions.student_id', 'admissions.school_id', 'admissions.status', 'schools.name as school_name')
-            ->leftJoin('students', 'students.id', '=', 'admissions.student_id')
-            ->leftJoin('schools', 'schools.id', '=', 'admissions.school_id')
-            ->when(Auth::user()->access_id != 0, function ($query) use ($user_school_id) {
-                return $query->where('schools.id', $user_school_id);
-            })
-            ->get();
+        ->select('admissions.id','admissions.date', 'students.studentnumber', 'students.firstname', 'students.lastname', 'admissions.student_id', 'admissions.school_id', 'admissions.status', 'schools.name as school_name', 'academic_years.id as academicyear_id', 'academic_years.from', 'academic_years.to')
+        ->leftJoin('students', 'students.id', '=', 'admissions.student_id')
+        ->leftJoin('schools', 'schools.id', '=', 'admissions.school_id')
+        ->leftJoin('academic_years', 'academic_years.id', '=', 'admissions.academicyear_id')
+        ->when(Auth::user()->access_id != 0, function ($query) use ($user_school_id, $academicyear_id) {
+            return $query->where('schools.id', $user_school_id)->where('academic_years.id', $academicyear_id);
+        })
+        
+        ->orderBy('admissions.date', 'desc')
+        ->get();
 
-        return view('pages.admission.admissions')->with(['admissions'=>$admissions, 'fullpage' => $fullpage, 'page'=>'index']);
+        return $admissions;
     }
 
     public function api_index(){
@@ -52,7 +71,11 @@ class AdmissionController extends Controller
                 return $query->where('school_id', $user_school_id);
             })->get();
 
-        return view('pages.admission.add')->with(['schools'=>$schools, 'classes'=>$classes, 'fullpage' => $fullpage, 'page'=>'add']);
+        $activeAY = AcademicYear::when(Auth::user()->access_id != 0, function ($query) use ($user_school_id) {
+                return $query->where('school_id', $user_school_id)->where('status', 'active');
+            })->get();
+
+        return view('pages.admission.add')->with(['schools'=>$schools, 'classes'=>$classes, 'fullpage' => $fullpage, 'page'=>'add', 'activeAY'=>$activeAY]);
     }
 
     public function api_showadmissionview(){
@@ -96,6 +119,8 @@ class AdmissionController extends Controller
             // create student
             $student = Student::create([
                 'studentnumber' => $request->student_id,
+                'lrn' => $request->lrn,
+                'lis' => $request->lis,
                 'firstname' => $request->first_name,
                 'middlename' => $request->middle_name,
                 'lastname' => $request->last_name,
@@ -133,6 +158,7 @@ class AdmissionController extends Controller
             'student_id' => $student->id,
             'admissionnumber' => $request->admission_id,
             'date' => $request->admission_date,
+            'academicyear_id' =>$request->academicyear_id,
             'school_id' => $request->school_id,
             'classes_id' => $request->classes_id,
             'section_id' => $request->section_id,

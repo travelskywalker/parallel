@@ -10,8 +10,6 @@
 
 @section('content')
 	<div id="app-main"></div>
-
-	@include('action-menu.menu',array( 'menus'=> ['print','add' ]) )
 @endsection
 
 

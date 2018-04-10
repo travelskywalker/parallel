@@ -198,7 +198,14 @@ class ClassesController extends Controller
     }
 
     public function getsections($class_id){
-        $sections = Section::where('classes_id', '=', $class_id)->get();
+
+        $academicyearcontroller = app(\App\Http\Controllers\AcademicYearController::class);
+
+        $user_school_id = Auth::user()->school_id;
+
+        $academicyear_id = $academicyearcontroller->getAcademicYear($user_school_id);
+
+        $sections = Section::where('classes_id', '=', $class_id)->where('academicyear_id', $academicyear_id)->get();
 
         return response()->json(['message'=>'success', 'data'=>$sections]);
     }

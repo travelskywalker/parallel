@@ -320,6 +320,7 @@ class ComposerStaticInit64f04b357a06c29ea4015c796cd9e781
 
     public static $classMap = array (
         'AccessesTableseeder' => __DIR__ . '/../..' . '/database/seeds/AccessesTableseeder.php',
+        'App\\AcademicYear' => __DIR__ . '/../..' . '/app/AcademicYear.php',
         'App\\Access' => __DIR__ . '/../..' . '/app/Access.php',
         'App\\Admission' => __DIR__ . '/../..' . '/app/Admission.php',
         'App\\Classes' => __DIR__ . '/../..' . '/app/Classes.php',
@@ -327,6 +328,7 @@ class ComposerStaticInit64f04b357a06c29ea4015c796cd9e781
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AccessController' => __DIR__ . '/../..' . '/app/Http/Controllers/AccessController.php',
         'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
+        'App\\Http\\Controllers\\AdmissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdmissionController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
@@ -337,7 +339,9 @@ class ComposerStaticInit64f04b357a06c29ea4015c796cd9e781
         'App\\Http\\Controllers\\SchoolController' => __DIR__ . '/../..' . '/app/Http/Controllers/SchoolController.php',
         'App\\Http\\Controllers\\SectionController' => __DIR__ . '/../..' . '/app/Http/Controllers/SectionController.php',
         'App\\Http\\Controllers\\StudentController' => __DIR__ . '/../..' . '/app/Http/Controllers/StudentController.php',
+        'App\\Http\\Controllers\\SystemController' => __DIR__ . '/../..' . '/app/Http/Controllers/SystemController.php',
         'App\\Http\\Controllers\\TeacherController' => __DIR__ . '/../..' . '/app/Http/Controllers/TeacherController.php',
+        'App\\Http\\Controllers\\UploadController' => __DIR__ . '/../..' . '/app/Http/Controllers/UploadController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',

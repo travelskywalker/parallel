@@ -28,6 +28,10 @@
     	display:none;
     }
 
+    .admission-type{
+      display:none;
+    }
+
     .system-tab {
         margin-top: 7px;
     }

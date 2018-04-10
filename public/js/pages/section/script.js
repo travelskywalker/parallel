@@ -1,6 +1,9 @@
 loadIndex();
 
 function init(){
+
+	filterInit();
+	
 	$('select#school_id').change(function(){
 
 		var teacher_url ='/api/school/'+$(this).val()+'/teachers';

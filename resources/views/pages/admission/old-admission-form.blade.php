@@ -5,12 +5,6 @@
 	</div>
 	<div class="col s6">
 		<div class="input-field col ">
-      <input id="admission_date" name="admission_date" type="text" class="datepicker">
-      <label for="admission_date">Date</label>
-	</div>
-	</div>
-	<div class="col s6">
-		<div class="input-field col ">
       <input id="admission_student_id" type="number" class="validate" value="{{$student->studentnumber}}" disabled>
       <label for="admission_student_id">Student Number</label>
       <input type="hidden" name="student_id" value="{{$student->id}}">

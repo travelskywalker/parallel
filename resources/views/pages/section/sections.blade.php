@@ -2,44 +2,14 @@
 	@include('pages.section.index')
 @else
 <h5>Sections</h5>
-	@if(count($sections) > 0)
-		<table class="bordered highlight">
-			<thead>
-			  <tr>
-			  	  @if(Auth::user()->access_id == 0)<th>School</th>@endif
-			      <th>Section</th>
-			      <th>Class</th>
-			      <th>Teacher</th>
-			      <th>Time From</th>
-			      <th>Time To</th>
-			      <th>Room</th>
-			      <th>Students</th>
-			      <th>Limit</th>
-			      
-			  </tr>
-			</thead>
+<div class="text-right col s3 offset-s9">
+	@include('components.filter.academicyear')
+</div>
 
-			<tbody>
+<div id="page_data">
+	@include('pages.section.sections-data')
+</div>
 
-				@foreach ($sections as $section)
-				<tr class="data-row" onclick="showDetails('section',{{$section->id}})">
-				@if(Auth::user()->access_id == 0)<td>{{$section->school_name}}</td>@endif
-			    <td>{{$section->name}}</td>
-			    <td>{{$section->class_name}}</td>
-			    <td>{{$section->teacher_firstname}} {{$section->teacher_lastname}}</td>
-			    <td>{{Carbon\Carbon::parse($section->timefrom)->format('h:i A')}}</td>
-			    <td>{{Carbon\Carbon::parse($section->timeto)->format('h:i A')}}</td>
-			    <td>{{$section->room}}</td>
-			    <td>{{$section->student_count}}</td>
-			    <td>{{$section->studentlimit}}</td>
-			    
-			  </tr>
-				@endforeach
-			</tbody>
-		</table>
-
-		@include('action-menu.menu',array( 'menus'=> ['print','add' ]) )
-	@else
-		No record in the database. Click <a href="/section/add">here</a> to add.
-	@endif
+	@include('action-menu.menu',array( 'menus'=> ['print','add' ]) )
+	
 @endif

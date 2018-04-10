@@ -46,6 +46,33 @@ function loadIndex(){
 	loadContent('/s'+app.path);
 }
 
+function saveNew(url){
+
+}
+
+function openAddModal(url, type){
+	$('#add_modal').modal({
+		complete: function(){
+			$('#add_modal .modal-content-container').html('');
+		}
+	}).modal('open');
+
+	$('#add_modal .modal-content-container').html(loader());
+
+	$('#add_modal .save-btn').attr('onClick', 'saveAdd("academicyears")');
+
+	sendAPI('GET', url).then(function(response){
+		$('#add_modal .modal-content-container').html(response);
+		formInit();
+		init();
+	})
+	.catch(function(error){
+		console.log(error.responseText);
+		$('#add_modal').modal('close');
+		errorMsg(language.somethingwentwrong);
+	});
+}
+
 function openEditModal(url, type){
 	$('#edit_modal').modal({
 		complete: function() { 
@@ -423,7 +450,6 @@ function sendForm(form, url, successpage){
 			}
 
 			showToast(response.message);
-			
 			if(successpage){
 
 				setTimeout(function(){

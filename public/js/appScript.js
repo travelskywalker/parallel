@@ -152,6 +152,22 @@ function saveEdit(type){
 	});
 }
 
+function saveAdd(type){
+	var form = $('#add_modal').find('form').attr('id');
+	var url = $('#'+form).attr('sendform-url');
+
+	sendForm(form, url, type).then(function(response){
+
+		console.log(response);
+
+	})
+	.catch(function(error){
+
+		errorMsg(lang.somethingwentwrong);
+
+	});
+}
+
 function updatePageTitle(url){
 	$('#page_title').html(getPageTitle(url));
 }
@@ -165,6 +181,12 @@ function editDetails(page, id){
 	url = '/'+page+'/edit/'+id;
 	loadContent(url);
 
+}
+
+function filterInit(){
+	$('#ay_filter').change(function(){
+		ay_filter($(this).val());
+	});
 }
 
 function formInit(){
@@ -213,10 +235,6 @@ function initialize(){
 	$(".button-collapse").sideNav({
 		edge: 'right'
 	});
-
-	
-
-	
 }
 
 function showDetails(page,id){
@@ -249,7 +267,6 @@ $(document).ready(function(){
 	});
 
 	$('.sub-nav .tab').click(function(){ navClick($(this)); });
-
 
 	window.addEventListener("popstate", function(e) {
 		// state
@@ -303,6 +320,25 @@ function updateDetails(page, form){
 function backbtnclick (){
 
 	window.history.back();
+
+}
+
+function ay_filter(id){
+
+	var page = window.location.pathname
+	var url = '/academicyear/'+id+page;
+	var container = $('#page_data');
+
+	// append loader
+	container.html(loader());
+
+	sendAPI('GET', url).then(function(response){
+		container.html(response);
+	})
+	.catch(function(error){
+		console.log(error.responseText);
+		errorMsg(language.somethingwentwrong);
+	});
 
 }
 

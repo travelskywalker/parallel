@@ -158,7 +158,7 @@ class SchoolController extends Controller
         return response()->json(['data'=>$teachers]);
     }
 
-    public function student_search($id,$key){
+    public function student_search($id,$key, $classes_id){
         
         $students = DB::table('students')
                     ->select('students.*', 'admissions.student_id', 'schools.name as school_name','students.id')
@@ -174,8 +174,6 @@ class SchoolController extends Controller
                     ->groupBy('students.id')
                     ->limit(5)
                     ->get();
-
-                    // dd($students);
 
         return view('pages.admission.student-search')->with(['students'=>$students]);
     }

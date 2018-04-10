@@ -18,6 +18,7 @@ class CreateAdmissionsTable extends Migration
             $table->text('type')->default('new');
             $table->integer('admissionnumber');
             $table->date('date');
+            $table->integer('academicyear_id');
             $table->integer('student_id');
             $table->integer('school_id');
             $table->integer('classes_id');

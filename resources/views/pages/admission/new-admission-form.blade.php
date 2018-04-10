@@ -3,17 +3,26 @@
 	<div class="col s4">
 		<div class="add-image-container" id="image_container" activates="image_upload" style="background: url('/files/images/default/nophoto.jpeg')">please upload square photo to ensure image compatibility</div>
 	</div>
+	
 	<div class="col s6">
 		<div class="input-field col ">
-      <input id="admission_date" name="admission_date" type="text" class="datepicker">
-      <label for="admission_date">Date</label>
+	      <input id="admission_student_id" name="student_id" type="number" class="validate">
+	      <label for="admission_student_id">Student Number</label>
+		</div>
 	</div>
-	</div>
+
 	<div class="col s6">
 		<div class="input-field col ">
-      <input id="admission_student_id" name="student_id" type="number" class="validate">
-      <label for="admission_student_id">Student Number</label>
+	      <input id="admission_lrn" name="lrn" type="number" class="validate">
+	      <label for="admission_lrn">LRN</label>
+		</div>
 	</div>
+
+	<div class="col s6">
+		<div class="input-field col ">
+	      <input id="admission_lis" name="lis" type="number" class="validate">
+	      <label for="admission_lis">LIS</label>
+		</div>
 	</div>
 </div>
 <div class="row">
